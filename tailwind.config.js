@@ -7,7 +7,17 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        pink: {
+          hot: '#FDB6BC',
+        },
+      },
+    },
+    container: {
+      center: true,
+      padding: '1rem',
+    },
   },
   variants: {
     extend: {},
