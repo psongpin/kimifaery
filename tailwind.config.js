@@ -11,6 +11,9 @@ module.exports = {
       colors: {
         pink: {
           hot: '#FDB6BC',
+          pale: '#FFE6E8',
+          dark: '#F2827F',
+          darker: '#782D40',
         },
       },
     },
@@ -20,7 +23,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['hover', 'focus'],
+    },
   },
   plugins: [],
 }
