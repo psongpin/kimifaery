@@ -24,7 +24,7 @@ const Clock: React.FC = () => {
 
   return (
     <div className="text-center text-white">
-      <div className="text-6xl mb-4">{currentTime}</div>
+      <div className="text-5xl md:text-6xl mb-4">{currentTime}</div>
       <div className="text-xl">{currentDate}</div>
     </div>
   )
