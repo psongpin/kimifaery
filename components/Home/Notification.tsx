@@ -29,7 +29,7 @@ const Notification: React.FC = () => {
         <span>now</span>
       </div>
 
-      <div className="py-6 px-16">
+      <div className="py-6 pl-16 pr-4 md:pr-16">
         You&apos;ve found the creative portfolio of Kimmy - designer, pink
         enthusiast, black mage, and animal lover. Look around, stay awhile. 👀
       </div>
