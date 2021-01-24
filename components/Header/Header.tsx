@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import { AnimatePresence, useViewportScroll } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 import { headerMainLink } from 'constants/header'
 import Hamburger from './Hamburger'
@@ -35,12 +34,10 @@ const Header: React.FC = () => {
     }
   })
 
-  console.log(router.pathname)
-
   return (
     <header
       className={clsx(
-        'fixed top-0 inset-x-0',
+        'fixed top-0 inset-x-0 z-10',
         'py-6',
         isOnTop ? 'bg-transparent' : 'bg-pink-hot shadow-lg',
         'transition-all ease-linear duration-300'
@@ -56,13 +53,12 @@ const Header: React.FC = () => {
               isOnTop && router.pathname === '/contact' && 'text-pink-dark',
               isOnTop && router.pathname === '/' && 'text-white',
               !isOnTop && 'text-white',
-              'underline',
               'flex items-center',
               'transition-all ease-linear duration-300'
             )}
           >
-            <Image src="/images/heart.png" alt="heart" width={20} height={20} />
-            <span className="ml-2">{headerMainLink}</span>
+            <span>❤️</span>
+            <span className="underline ml-2">{headerMainLink}</span>
           </a>
         </Link>
 
