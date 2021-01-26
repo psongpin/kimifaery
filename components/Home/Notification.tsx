@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+import { bannerContents } from 'constants/home'
+
 const Frame = styled(motion.div)`
   max-width: 821px;
   width: 100%;
@@ -25,13 +27,12 @@ const Notification: React.FC = () => {
     >
       <div className="p-4 pl-16 flex justify-between border-b border-white relative">
         <LetterIcon className="absolute top-0 left-0 text-3xl">💌</LetterIcon>
-        <span>Message</span>
-        <span>now</span>
+        <span>{bannerContents.mesage}</span>
+        <span>{bannerContents.now}</span>
       </div>
 
       <div className="py-6 pl-16 pr-4 md:pr-16">
-        You&apos;ve found the creative portfolio of Kimmy - designer, pink
-        enthusiast, black mage, and animal lover. Look around, stay awhile. 👀
+        {bannerContents.notificationMessage}
       </div>
     </Frame>
   )

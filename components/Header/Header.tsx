@@ -4,10 +4,16 @@ import clsx from 'clsx'
 import { AnimatePresence, useViewportScroll } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import styled from 'styled-components'
 
 import { headerMainLink } from 'constants/header'
 import Hamburger from './Hamburger'
 import Navigation from './Navigation'
+
+const HeaderFrame = styled.header`
+  max-width: 1920px;
+  width: 100%;
+`
 
 const Header: React.FC = () => {
   const { scrollYProgress } = useViewportScroll()
@@ -35,10 +41,10 @@ const Header: React.FC = () => {
   })
 
   return (
-    <header
+    <HeaderFrame
       className={clsx(
         'fixed top-0 inset-x-0 z-10',
-        'py-6',
+        'py-6 mx-auto',
         isOnTop ? 'bg-transparent' : 'bg-pink-hot shadow-lg',
         'transition-all ease-linear duration-300'
       )}
@@ -68,7 +74,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isMenuVisible && <Navigation setMenuVisibility={setMenuVisibility} />}
       </AnimatePresence>
-    </header>
+    </HeaderFrame>
   )
 }
 

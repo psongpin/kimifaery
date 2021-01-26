@@ -14,7 +14,15 @@ module.exports = {
           pale: '#FFE6E8',
           dark: '#F2827F',
           darker: '#782D40',
+          bright: '#F4CADA',
         },
+        yellow: {
+          pale: '#FFFBEA',
+        },
+        gray: {
+          'semi-dark': '#444444',
+        },
+        'blue-green': '#BFF3EE',
       },
     },
     container: {
