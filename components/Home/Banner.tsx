@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 import { bannerContents } from 'constants/home'
@@ -12,9 +13,20 @@ const Frame = styled.div``
 const Banner: React.FC = () => {
   return (
     <Frame className="bg-pink-dark relative min-h-screen pb-40 md:pb-48">
+      <Image
+        src="/images/banner-image.png"
+        layout="fill"
+        objectFit="cover"
+        className="z-0"
+      />
+
+      <div className="absolute z-0 inset-0 bg-gray-900 bg-opacity-10 w-full h-full" />
+
       <div className="container pt-24 md:pt-40 flex flex-col items-center justify-center">
-        <Clock />
-        <Notification />
+        <div className="relative">
+          <Clock />
+          <Notification />
+        </div>
 
         <motion.div
           animate={{ y: [0, 10, 20, 10, 0] }}
