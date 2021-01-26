@@ -20,7 +20,7 @@ const Banner: React.FC = () => {
         className="z-0"
       />
 
-      <div className="absolute z-0 inset-0 bg-gray-900 bg-opacity-10 w-full h-full" />
+      {/* <div className="absolute z-0 inset-0 bg-gray-900 bg-opacity-10 w-full h-full" /> */}
 
       <div className="container pt-24 md:pt-40 flex flex-col items-center justify-center">
         <div className="relative">
