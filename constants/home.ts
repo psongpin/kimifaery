@@ -31,6 +31,20 @@ export const introductionContents = {
       imgH: 222,
     },
   ],
+  skills: [
+    {
+      title: 'Adobe Creative Cloud',
+      description: 'Adobe XD, Photoshop, Illustrator, SketchApp, Figma',
+    },
+    {
+      title: 'Project Management',
+      description: 'Jira, Trello, Monday, Slack, Asana',
+    },
+    {
+      title: 'Special Mention',
+      description: 'Discord, Nintendo Switch, Overwatch, Genshin Impact',
+    },
+  ],
 }
 
 export const showcaseContents = {

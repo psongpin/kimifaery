@@ -1,11 +1,19 @@
 import clsx from 'clsx'
-import { showcaseContents } from 'constants/home'
 import Image from 'next/image'
+import styled from 'styled-components'
+
+import { introductionContents, showcaseContents } from 'constants/home'
+
+const SkillDisplay = styled.div`
+  max-width: 600px;
+  width: 100%;
+`
 
 const ShowcaseSection: React.FC = () => {
   return (
     <section className="pt-32">
       <div className="container">
+        {/* Boxed contents */}
         <h2 className="text-pink-darker text-4xl md:text-5xl font-bold mb-12">
           {showcaseContents.mainHeading}
         </h2>
@@ -52,6 +60,47 @@ const ShowcaseSection: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {/* Bullet content */}
+        <SkillDisplay
+          className={clsx(
+            'py-32 mx-auto',
+            'flex flex-col items-center gap-y-10 md:gap-y-16'
+          )}
+        >
+          {introductionContents.skills.map(skill => (
+            <div
+              className={clsx(
+                'flex justify-between md:items-center gap-x-10 md:gap-x-24',
+                'w-full'
+              )}
+            >
+              <div className="text-pink-dark">
+                <svg
+                  className="w-10 h-10 md:w-16 md:h-16"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+
+              <div className="flex-1">
+                <h3 className="text-pink-darker font-bold text-3xl mb-2">
+                  {skill.title}
+                </h3>
+                <p className="text-lg text-gray-semi-dark">
+                  {skill.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </SkillDisplay>
       </div>
     </section>
   )
