@@ -59,6 +59,7 @@ const Header: React.FC = () => {
               isOnTop && router.pathname === '/contact' && 'text-pink-dark',
               isOnTop && router.pathname === '/' && 'text-white',
               !isOnTop && 'text-white',
+              'text-lg font-medium',
               'flex items-center',
               'transition-all ease-linear duration-300'
             )}

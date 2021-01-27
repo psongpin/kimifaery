@@ -21,6 +21,10 @@ module.exports = {
         },
         gray: {
           'semi-dark': '#444444',
+          solid: '#F4F5FB',
+        },
+        purple: {
+          lavander: '#F3E7FF',
         },
         'blue-green': '#BFF3EE',
       },

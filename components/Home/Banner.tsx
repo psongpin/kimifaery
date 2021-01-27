@@ -8,7 +8,7 @@ import Notification from './Notification'
 
 const Clock = dynamic(() => import('components/Home/Clock'), { ssr: false })
 
-const Frame = styled.div``
+const Frame = styled.section``
 
 const Banner: React.FC = () => {
   return (

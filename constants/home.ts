@@ -32,3 +32,19 @@ export const introductionContents = {
     },
   ],
 }
+
+export const showcaseContents = {
+  mainHeading: 'With knowledge, passion, heart & soul.',
+  boxContents: [
+    {
+      mainHeading: 'Watsons',
+      subHeading: 'Concept Design, Interaction',
+      img: { url: '/images/watsons.png', w: 720, h: 510 },
+    },
+    {
+      mainHeading: 'Fullerton',
+      subHeading: 'Facelift, Interaction Design',
+      img: { url: '/images/fullerton.png', w: 720, h: 493 },
+    },
+  ],
+}

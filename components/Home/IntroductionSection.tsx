@@ -5,7 +5,7 @@ import { introductionContents } from 'constants/home'
 
 const IntroductionSection: React.FC = () => {
   return (
-    <section className="pt-24 md:pt-40 bg-white">
+    <section className="pt-24 md:pt-40">
       <div className="container">
         <div className="text-center md:text-left">
           <Image
