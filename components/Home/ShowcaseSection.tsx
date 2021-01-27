@@ -2,7 +2,8 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import styled from 'styled-components'
 
-import { introductionContents, showcaseContents } from 'constants/home'
+import CTA from 'components/CTA'
+import { showcaseContents } from 'constants/home'
 
 const SkillDisplay = styled.div`
   max-width: 600px;
@@ -11,7 +12,7 @@ const SkillDisplay = styled.div`
 
 const ShowcaseSection: React.FC = () => {
   return (
-    <section className="pt-32">
+    <section className="py-32">
       <div className="container">
         {/* Boxed contents */}
         <h2 className="text-pink-darker text-4xl md:text-5xl font-bold mb-12">
@@ -68,7 +69,7 @@ const ShowcaseSection: React.FC = () => {
             'flex flex-col items-center gap-y-10 md:gap-y-16'
           )}
         >
-          {introductionContents.skills.map(skill => (
+          {showcaseContents.skills.map(skill => (
             <div
               className={clsx(
                 'flex justify-between md:items-center gap-x-10 md:gap-x-24',
@@ -101,6 +102,12 @@ const ShowcaseSection: React.FC = () => {
             </div>
           ))}
         </SkillDisplay>
+
+        {/* CTA */}
+        <CTA
+          heading={showcaseContents.cta.heading}
+          buttonText={showcaseContents.cta.buttonText}
+        />
       </div>
     </section>
   )
