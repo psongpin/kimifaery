@@ -38,6 +38,7 @@ module.exports = {
   variants: {
     extend: {
       borderWidth: ['hover', 'focus'],
+      margin: ['last'],
     },
   },
   plugins: [],

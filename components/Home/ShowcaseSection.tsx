@@ -38,10 +38,15 @@ const ShowcaseSection: React.FC = () => {
               <div
                 className={clsx(
                   'pt-12 md:pt-20 px-4 md:px-8 xl:px-16 pb-10',
-                  'flex justify-between items-start lg:items-center flex-col lg:flex-row gap-x-8 gap-y-4'
+                  'flex justify-between items-start lg:items-center flex-col lg:flex-row'
                 )}
               >
-                <h3 className="text-pink-darker font-bold text-3xl">
+                <h3
+                  className={clsx(
+                    'text-pink-darker font-bold text-3xl',
+                    'mr-0 lg:mr-8 mb-4 lg:mb-0'
+                  )}
+                >
                   {content.mainHeading}
                 </h3>
                 <p className="text-lg text-gray-semi-dark">
@@ -64,19 +69,16 @@ const ShowcaseSection: React.FC = () => {
 
         {/* Bullet content */}
         <SkillDisplay
-          className={clsx(
-            'py-32 mx-auto',
-            'flex flex-col items-center gap-y-10 md:gap-y-16'
-          )}
+          className={clsx('py-32 mx-auto', 'flex flex-col items-center')}
         >
           {showcaseContents.skills.map(skill => (
             <div
               className={clsx(
-                'flex justify-between md:items-center gap-x-10 md:gap-x-24',
-                'w-full'
+                'flex justify-between md:items-center',
+                'w-full mb-10 md:mb-16 last:mb-0'
               )}
             >
-              <div className="text-pink-dark">
+              <div className="text-pink-dark mr-10 md:mr-24">
                 <svg
                   className="w-10 h-10 md:w-16 md:h-16"
                   fill="currentColor"

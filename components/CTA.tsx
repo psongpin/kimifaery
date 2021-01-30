@@ -16,12 +16,12 @@ const CTA: React.FC<Props> = ({ heading, buttonText }) => {
   return (
     <Frame
       className={clsx(
-        'flex flex-col md:flex-row justify-between items-center gap-x-10 gap-y-8',
+        'flex flex-col md:flex-row justify-between items-center',
         'mx-auto px-8 py-16 lg:px-16 lg:py-16',
         'bg-pink-peach rounded-2xl'
       )}
     >
-      <h3 className="text-pink-darker font-bold text-3xl text-center md:text-left">
+      <h3 className="text-pink-darker font-bold text-3xl text-center md:text-left mr-0 md:mr-10 mb-8 md:mb-0">
         {heading}
       </h3>
 
