@@ -5,7 +5,9 @@ import { footerTagline, footerLinks } from 'constants/footer'
 
 const Footer: React.FC = () => {
   return (
-    <footer className={clsx('mt-auto py-12', 'bg-pink-hot text-white')}>
+    <footer
+      className={clsx('mt-auto py-12', 'bg-pink-hot text-white', 'relative')}
+    >
       <div className="container flex flex-col md:flex-row items-center justify-between">
         <p className="mb-6 md:mb-0">{footerTagline}</p>
 

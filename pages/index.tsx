@@ -6,7 +6,7 @@ const Home: React.FC = () => {
   return (
     <div className="flex-1">
       <Banner />
-      <div className="bg-white">
+      <div className="bg-white relative">
         <IntroductionSection />
         <ShowcaseSection />
       </div>

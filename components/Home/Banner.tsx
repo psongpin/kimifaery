@@ -10,17 +10,22 @@ const Clock = dynamic(() => import('components/Home/Clock'), { ssr: false })
 
 const Frame = styled.section``
 
+const BannerImageFrame = styled.div`
+  max-width: 1920px;
+  width: 100%;
+`
+
 const Banner: React.FC = () => {
   return (
-    <Frame className="bg-pink-dark relative min-h-screen pb-40 md:pb-48">
-      <Image
-        src="/images/banner-image.png"
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
-      />
-
-      {/* <div className="absolute z-0 inset-0 bg-gray-900 bg-opacity-10 w-full h-full" /> */}
+    <Frame className="relative min-h-screen pb-40 md:pb-48 overflow-hidden">
+      <BannerImageFrame className="fixed inset-0 z-0 mx-auto min-h-screen">
+        <Image
+          src="/images/banner-image.png"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+        />
+      </BannerImageFrame>
 
       <div className="container pt-24 md:pt-40 flex flex-col items-center justify-center">
         <div className="relative">
