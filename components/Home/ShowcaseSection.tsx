@@ -10,10 +10,70 @@ const SkillDisplay = styled.div`
   width: 100%;
 `
 
+const PatternFrame = styled.div`
+  width: 40%;
+
+  @media (min-width: 767px) {
+    width: 30%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 25%;
+  }
+
+  @media (min-width: 1280px) {
+    width: 20%;
+  }
+`
+
+// Pattern SVGs
+const Pattern1: React.FC = () => {
+  return (
+    <PatternFrame className="absolute top-0 right-0 z-0">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        // width={295.498}
+        // height={1079.379}
+        viewBox="0 0 295.498 1079.379"
+        className="w-full"
+      >
+        <path
+          d="M294.923 0S-21.432 158.349 1.153 403.564s153.26 214.563 229.082 416.22 64.688 259.6 64.688 259.6z"
+          fill="#ffe6e8"
+          opacity={0.55}
+        />
+      </svg>
+    </PatternFrame>
+  )
+}
+
+const Pattern2: React.FC = () => {
+  return (
+    <PatternFrame className="absolute bottom-0 left-0 z-0">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        // width={357.59}
+        // height={1409.455}
+        viewBox="0 0 357.59 1409.455"
+        className="w-full"
+      >
+        <path
+          d="M0 0s25.94 255.238 122.735 382.685S439.908 651.517 325.4 905.071 0 1409.454 0 1409.454z"
+          fill="#fff8db"
+        />
+      </svg>
+    </PatternFrame>
+  )
+}
+
+// Main Component
 const ShowcaseSection: React.FC = () => {
   return (
-    <section className="py-32">
-      <div className="container">
+    <section className="py-32 relative">
+      <Pattern1 />
+      <Pattern2 />
+
+      <div className="container relative">
         {/* Boxed contents */}
         <h2 className="text-pink-darker text-4xl md:text-5xl font-bold mb-12">
           {showcaseContents.mainHeading}
