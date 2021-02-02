@@ -1,4 +1,5 @@
 import Banner from 'components/Home/Banner'
+import InstagramSection from 'components/Home/InstagramSection'
 import IntroductionSection from 'components/Home/IntroductionSection'
 import ShowcaseSection from 'components/Home/ShowcaseSection'
 
@@ -9,6 +10,7 @@ const Home: React.FC = () => {
       <div className="bg-white relative">
         <IntroductionSection />
         <ShowcaseSection />
+        <InstagramSection />
       </div>
     </div>
   )

@@ -66,3 +66,8 @@ export const showcaseContents = {
     buttonText: 'work@hellokimmy.com',
   },
 }
+
+export const instagramSectionContents = {
+  mainHeading: `What's on the gram`,
+  buttonText: 'Follow me',
+}
