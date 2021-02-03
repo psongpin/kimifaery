@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   return (
     <div className="flex-1">
       <Banner />
-      <div className="bg-white relative">
+      <div className="bg-white relative overflow-hidden">
         <IntroductionSection />
         <ShowcaseSection />
         <InstagramSection />

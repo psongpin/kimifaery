@@ -49,7 +49,7 @@ const Pattern1: React.FC = () => {
 
 const Pattern2: React.FC = () => {
   return (
-    <PatternFrame className="absolute bottom-0 left-0 z-0">
+    <PatternFrame className="absolute bottom-0 left-0 z-0 transform translate-y-1/2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         // width={357.59}

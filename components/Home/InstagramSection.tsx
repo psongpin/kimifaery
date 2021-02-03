@@ -3,7 +3,7 @@ import { instagramSectionContents } from 'constants/home'
 
 const InstagramSection: React.FC = () => {
   return (
-    <section className="py-32">
+    <section className="pb-32 relative">
       <div className="container">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-pink-darker text-4xl md:text-5xl font-bold">
