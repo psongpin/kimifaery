@@ -19,7 +19,7 @@ const Hamburger: React.FC<Props> = ({ isOnTop, setMenuVisibility }) => {
         isOnTop && router.pathname === '/contact' && 'text-pink-dark',
         isOnTop && router.pathname === '/' && 'text-white',
         !isOnTop && 'text-white',
-        'focus:outline-none',
+        'focus:outline-none border-0',
         'transition-all ease-linear duration-300'
       )}
       onClick={() => setMenuVisibility(true)}
