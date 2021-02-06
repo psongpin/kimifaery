@@ -52,7 +52,7 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
         exit={{ opacity: 0 }}
         transition={{ ease: 'linear', duration: 0.2 }}
         className={clsx(
-          'fixed inset-0 z-10',
+          'fixed inset-0 z-20',
           'w-screen h-screen bg-gray-900 bg-opacity-50',
           'cursor-pointer'
         )}

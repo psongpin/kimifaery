@@ -43,7 +43,7 @@ const Header: React.FC = () => {
   return (
     <HeaderFrame
       className={clsx(
-        'fixed top-0 inset-x-0 z-10',
+        'fixed top-0 inset-x-0 z-20',
         'py-6 mx-auto',
         isOnTop ? 'bg-transparent' : 'bg-pink-hot shadow-lg',
         'transition-all ease-linear duration-300'
