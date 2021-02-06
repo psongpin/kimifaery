@@ -5,6 +5,7 @@ import styled from 'styled-components'
 interface Props {
   title: string
   url: string
+  thumbnailUrl: string
 }
 
 const OverlayLink = styled.a`
@@ -17,12 +18,13 @@ const OverlayLink = styled.a`
   }
 `
 
-const LinkGridItem: React.FC<Props> = ({ title, url }) => {
+const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl }) => {
   return (
     <div className="rounded-2xl bg-white relative overflow-hidden">
       <Image
-        src="/images/sample-thumb.jpg"
+        src={thumbnailUrl}
         layout="responsive"
+        quality={100}
         width={448}
         height={448}
       />

@@ -1,0 +1,17 @@
+{
+  "schema": [
+    {
+      "https://api-ap-northeast-1.graphcms.com/v2/ckkobqnxkxo2y01z4f8zraof1/master": {
+        "headers": {}
+      }
+    }
+  ],
+  "generates": {
+    "./types/graphcms.ts": {
+      "plugins": ["typescript", "typescript-operations"]
+    }
+  },
+  "hooks": {
+    "afterAllFileWrite": ["prettier --write"]
+  }
+}
