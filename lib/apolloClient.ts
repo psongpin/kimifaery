@@ -28,7 +28,7 @@ const createApolloClient = () => {
         Query: {
           fields: {
             linkPostsConnection: {
-              keyArgs: false,
+              keyArgs: ['where'],
               merge(existing, incoming) {
                 if (!existing) return incoming
                 return {

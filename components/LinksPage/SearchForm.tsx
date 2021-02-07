@@ -1,22 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
 
 import Button from 'components/Button'
+
+interface Props {
+  searchString?: string
+}
 
 const Frame = styled.div`
   max-width: 800px;
 `
 
-const SearchForm: React.FC = () => {
-  const [searchString, setSearchString] = useState('')
+const SearchForm: React.FC<Props> = ({ searchString = '' }) => {
+  const [search, setSearch] = useState(searchString)
+  const router = useRouter()
+
+  useEffect(() => setSearch(searchString), [searchString])
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchString(event.currentTarget.value)
+    setSearch(event.currentTarget.value)
   }
 
-  const onSubmit = (): void => {
-    // do something here
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault()
+    router.push(`/links?search=${search}`)
   }
 
   return (
@@ -26,6 +35,7 @@ const SearchForm: React.FC = () => {
           type="text"
           name="search"
           placeholder="Search item here.."
+          required
           className={clsx(
             'w-full',
             'text-lg text-pink-darker',
@@ -33,12 +43,12 @@ const SearchForm: React.FC = () => {
             'focus:outline-none',
             'py-4 pl-8 pr-24 md:pr-40'
           )}
-          value={searchString}
+          value={search}
           onChange={onInputChange}
         />
 
         <div className="absolute right-0 inset-y-0">
-          <Button variant="primary" padding="px-8 md:px-10 py-4">
+          <Button variant="primary" type="submit" padding="px-8 md:px-10 py-4">
             <span className="hidden md:inline">Search</span>
             <svg
               className="inline md:hidden w-6 h-6"

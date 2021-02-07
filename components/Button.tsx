@@ -1,10 +1,8 @@
 import clsx from 'clsx'
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'primary' | 'secondary'
   padding?: string
-  className?: string
-  onClick?: () => void
 }
 
 const Button: React.FC<Props> = ({
@@ -13,9 +11,11 @@ const Button: React.FC<Props> = ({
   className = '',
   onClick,
   children,
+  type,
 }) => (
   <button
-    type="button"
+    // eslint-disable-next-line react/button-has-type
+    type={type || 'button'}
     className={clsx(
       variant === 'primary' && 'bg-pink-dark text-white',
       variant === 'secondary' && 'bg-pink-peach text-pink-dark',

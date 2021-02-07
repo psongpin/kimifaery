@@ -14,6 +14,10 @@ import { addApolloState, initializeApollo } from 'lib/apolloClient'
 import { Query } from 'types/graphcms'
 import Loader from 'components/Loader'
 
+interface Props {
+  searchString?: string
+}
+
 interface QueryData {
   linkPostsConnection: Query['linkPostsConnection']
 }
@@ -21,6 +25,7 @@ interface QueryData {
 interface QueryVariables {
   first: number
   after?: string
+  searchString?: string
 }
 
 const Grid = styled.section`
@@ -32,8 +37,12 @@ const Grid = styled.section`
 `
 
 const GET_LINK_POSTS = gql`
-  query getLinkPosts($first: Int!, $after: String) {
-    linkPostsConnection(first: $first, after: $after) {
+  query getLinkPosts($first: Int!, $after: String, $searchString: String) {
+    linkPostsConnection(
+      first: $first
+      after: $after
+      where: { title_contains: $searchString }
+    ) {
       pageInfo {
         endCursor
         hasNextPage
@@ -56,24 +65,27 @@ const GET_LINK_POSTS = gql`
   }
 `
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const { query } = ctx
+  const { search: searchString = '' } = query
+
   const apolloClient = initializeApollo()
 
   await apolloClient.query({
     query: GET_LINK_POSTS,
-    variables: { first: 12 },
+    variables: { first: 12, searchString },
   })
 
   return addApolloState(apolloClient, {
-    props: {},
+    props: { searchString },
   })
 }
 
-const Links: React.FC = () => {
+const Links: React.FC<Props> = ({ searchString }) => {
   const { data, loading, fetchMore } = useQuery<QueryData, QueryVariables>(
     GET_LINK_POSTS,
     {
-      variables: { first: 12 },
+      variables: { first: 12, searchString },
       notifyOnNetworkStatusChange: true,
     }
   )
@@ -89,7 +101,7 @@ const Links: React.FC = () => {
           {contents.mainDescription}
         </p>
 
-        <SearchForm />
+        <SearchForm searchString={searchString} />
         <TagFilters />
       </section>
 
