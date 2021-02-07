@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import styled, { css } from 'styled-components'
 
 interface TagProps {
@@ -43,18 +44,34 @@ const Tag = styled.button.attrs({
     'w-full',
     `focus:outline-none`
   ),
+  type: 'button',
 })<TagProps>`
   ${props => tagStyleMap[props.tagValue]}
   max-width: 200px;
 `
 
 const TagFilters: React.FC = () => {
+  const router = useRouter()
+
+  const onViewAll = () => router.push('/links')
+
+  const onTagClick = (tagValue: string) => () =>
+    router.push(`/links?tag=${tagValue}`)
+
   return (
     <Frame className="flex justify-center flex-wrap w-full mx-auto">
-      <Tag tagValue="All">All</Tag>
-      <Tag tagValue="Favorites">Favorites</Tag>
-      <Tag tagValue="Must Haves">Must Haves</Tag>
-      <Tag tagValue="Partnerships">Partnerships</Tag>
+      <Tag tagValue="All" onClick={onViewAll}>
+        All
+      </Tag>
+      <Tag tagValue="Favorites" onClick={onTagClick('Favorites')}>
+        Favorites
+      </Tag>
+      <Tag tagValue="Must Haves" onClick={onTagClick('Must Haves')}>
+        Must Haves
+      </Tag>
+      <Tag tagValue="Partnerships" onClick={onTagClick('Partnerships')}>
+        Partnerships
+      </Tag>
     </Frame>
   )
 }

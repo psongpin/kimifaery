@@ -11,11 +11,12 @@ import Button from 'components/Button'
 import { showcaseContents } from 'constants/home'
 import contents from 'constants/links'
 import { addApolloState, initializeApollo } from 'lib/apolloClient'
-import { Query } from 'types/graphcms'
+import { LinkPostWhereInput, Query } from 'types/graphcms'
 import Loader from 'components/Loader'
 
 interface Props {
   searchString?: string
+  tag?: string
 }
 
 interface QueryData {
@@ -25,7 +26,7 @@ interface QueryData {
 interface QueryVariables {
   first: number
   after?: string
-  searchString?: string
+  where?: LinkPostWhereInput
 }
 
 const Grid = styled.section`
@@ -37,12 +38,8 @@ const Grid = styled.section`
 `
 
 const GET_LINK_POSTS = gql`
-  query getLinkPosts($first: Int!, $after: String, $searchString: String) {
-    linkPostsConnection(
-      first: $first
-      after: $after
-      where: { title_contains: $searchString }
-    ) {
+  query getLinkPosts($first: Int!, $after: String, $where: LinkPostWhereInput) {
+    linkPostsConnection(first: $first, after: $after, where: $where) {
       pageInfo {
         endCursor
         hasNextPage
@@ -67,25 +64,39 @@ const GET_LINK_POSTS = gql`
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const { query } = ctx
-  const { search: searchString = '' } = query
+  // const { search: searchString = '', tag = '' } = query
+  const searchString = (query.search as string) || ''
+  const tag = (query.tag as string) || ''
 
   const apolloClient = initializeApollo()
 
-  await apolloClient.query({
+  await apolloClient.query<QueryData, QueryVariables>({
     query: GET_LINK_POSTS,
-    variables: { first: 12, searchString },
+    variables: {
+      first: 12,
+      where: {
+        ...(searchString && { title_contains: searchString }),
+        ...(tag && { tags: [tag] }),
+      },
+    },
   })
 
   return addApolloState(apolloClient, {
-    props: { searchString },
+    props: { searchString, tag },
   })
 }
 
-const Links: React.FC<Props> = ({ searchString }) => {
+const Links: React.FC<Props> = ({ searchString, tag }) => {
   const { data, loading, fetchMore } = useQuery<QueryData, QueryVariables>(
     GET_LINK_POSTS,
     {
-      variables: { first: 12, searchString },
+      variables: {
+        first: 12,
+        where: {
+          ...(searchString && { title_contains: searchString }),
+          ...(tag && { tags: [tag] }),
+        },
+      },
       notifyOnNetworkStatusChange: true,
     }
   )
@@ -107,16 +118,22 @@ const Links: React.FC<Props> = ({ searchString }) => {
 
       {data && (
         <>
-          <Grid className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-16 mt-20 mx-auto w-full">
-            {data.linkPostsConnection.edges.map(linkPostEdge => (
-              <LinkGridItem
-                key={linkPostEdge.node.id}
-                title={linkPostEdge.node.title}
-                url={linkPostEdge.node.redirectLink}
-                thumbnailUrl={linkPostEdge.node.thumbnail.url}
-              />
-            ))}
-          </Grid>
+          {data.linkPostsConnection.edges.length ? (
+            <Grid className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-16 mt-20 mx-auto w-full">
+              {data.linkPostsConnection.edges.map(linkPostEdge => (
+                <LinkGridItem
+                  key={linkPostEdge.node.id}
+                  title={linkPostEdge.node.title}
+                  url={linkPostEdge.node.redirectLink}
+                  thumbnailUrl={linkPostEdge.node.thumbnail.url}
+                />
+              ))}
+            </Grid>
+          ) : (
+            <h1 className="text-pink-darker text-3xl font-bold text-center mt-20">
+              No links found!
+            </h1>
+          )}
 
           {loading && (
             <div className="flex justify-center mt-10">
