@@ -80,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       first: 12,
       where: {
         ...(searchString && { title_contains: searchString }),
-        ...(tag && { tags: [tag] }),
+        ...(tag && { tags_contains_some: [tag] }),
       },
     },
   })
@@ -98,7 +98,7 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
         first: 12,
         where: {
           ...(searchString && { title_contains: searchString }),
-          ...(tag && { tags: [tag] }),
+          ...(tag && { tags_contains_some: [tag] }),
         },
       },
       notifyOnNetworkStatusChange: true,
