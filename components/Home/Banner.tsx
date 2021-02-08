@@ -14,7 +14,7 @@ const Banner: React.FC = () => {
   return (
     <Frame className="relative min-h-screen pb-40 md:pb-48 overflow-hidden">
       <Image
-        src="/images/banner-image.png"
+        src="/images/banner-image.jpg"
         layout="fill"
         objectFit="cover"
         className="z-0"
