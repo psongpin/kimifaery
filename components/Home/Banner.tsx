@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { InView } from 'react-intersection-observer'
 
 import { bannerContents } from 'constants/home'
 import Notification from './Notification'
@@ -13,6 +14,19 @@ const Frame = styled.section``
 const Banner: React.FC = () => {
   return (
     <Frame className="relative min-h-screen pb-40 md:pb-48 overflow-hidden">
+      <InView
+        onChange={inView => {
+          if (inView) {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth',
+            })
+          }
+        }}
+      >
+        {({ ref }) => <div ref={ref} className="absolute bottom-1 inset-x-0" />}
+      </InView>
+
       <Image
         src="/images/banner-image.jpg"
         layout="fill"

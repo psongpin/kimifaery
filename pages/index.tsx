@@ -1,5 +1,3 @@
-import { InView } from 'react-intersection-observer'
-
 import Banner from 'components/Home/Banner'
 import InstagramSection from 'components/Home/InstagramSection'
 import IntroductionSection from 'components/Home/IntroductionSection'
