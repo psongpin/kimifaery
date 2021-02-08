@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import clsx from 'clsx'
 import styled from 'styled-components'
+import { InView } from 'react-intersection-observer'
 
 import { introductionContents } from 'constants/home'
 
@@ -47,6 +48,24 @@ const IntroductionSection: React.FC = () => {
   return (
     <section className="pt-24 md:pt-28 relative overflow-hidden">
       <Pattern />
+      <InView
+        onChange={inView => {
+          if (inView) {
+            const scrollTarget = document.querySelector('.scroll-target')
+            if (
+              scrollTarget &&
+              window.pageYOffset < scrollTarget.getBoundingClientRect().top
+            ) {
+              window.scrollTo({
+                top: scrollTarget.getBoundingClientRect().top,
+                behavior: 'smooth',
+              })
+            }
+          }
+        }}
+      >
+        {({ ref }) => <div ref={ref} className="absolute top-1 inset-x-0" />}
+      </InView>
 
       <div className="container relative">
         <div className="text-center md:text-left">
@@ -76,6 +95,7 @@ const IntroductionSection: React.FC = () => {
         >
           {introductionContents.boxesContents.map((content, index) => (
             <div
+              key={content.title}
               className={clsx(
                 index === 0 && 'bg-blue-green',
                 index === 1 && 'bg-pink-bright',

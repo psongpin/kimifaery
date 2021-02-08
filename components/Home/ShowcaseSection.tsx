@@ -87,6 +87,7 @@ const ShowcaseSection: React.FC = () => {
         >
           {showcaseContents.boxContents.map((content, index) => (
             <div
+              key={content.mainHeading}
               className={clsx(
                 index === 0 && 'bg-gray-solid',
                 index === 1 && 'bg-purple-lavander',
@@ -133,6 +134,7 @@ const ShowcaseSection: React.FC = () => {
         >
           {showcaseContents.skills.map(skill => (
             <div
+              key={skill.title}
               className={clsx(
                 'flex justify-between md:items-center',
                 'w-full mb-10 md:mb-16 last:mb-0'

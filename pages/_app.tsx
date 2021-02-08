@@ -4,11 +4,12 @@ import { ApolloProvider } from '@apollo/client'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
+import { useApollo } from 'lib/apolloClient'
 import theme from 'styles/theme'
 import GlobalStyle from 'styles/globals'
 
 import '../styles/globals.css'
-import { useApollo } from 'lib/apolloClient'
+import 'intersection-observer'
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps)
