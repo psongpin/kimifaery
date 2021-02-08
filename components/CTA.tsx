@@ -25,7 +25,9 @@ const CTA: React.FC<Props> = ({ heading, buttonText }) => {
         {heading}
       </h3>
 
-      <Button variant="primary">{buttonText}</Button>
+      <a href="mailto:work@hellokimmy.com">
+        <Button variant="primary">{buttonText}</Button>
+      </a>
     </Frame>
   )
 }

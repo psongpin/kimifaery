@@ -61,12 +61,13 @@ const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl, tags }) => {
               'flex',
               'text-white text-xs font-bold uppercase',
               'rounded-lg',
-              'px-3 py-2'
+              'px-3 py-2',
+              'w-44'
             )}
             tagValue={tag}
           >
-            <span className="mr-3">{tagMarks[tag]}</span>
-            <span>{tag}</span>
+            <span>{tagMarks[tag]}</span>
+            <span className="flex-1 text-center">{tag}</span>
           </Tag>
         ))}
       </div>
