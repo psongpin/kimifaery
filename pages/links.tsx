@@ -39,7 +39,12 @@ const Grid = styled.section`
 
 const GET_LINK_POSTS = gql`
   query getLinkPosts($first: Int!, $after: String, $where: LinkPostWhereInput) {
-    linkPostsConnection(first: $first, after: $after, where: $where) {
+    linkPostsConnection(
+      first: $first
+      after: $after
+      where: $where
+      orderBy: createdAt_DESC
+    ) {
       pageInfo {
         endCursor
         hasNextPage
@@ -64,7 +69,6 @@ const GET_LINK_POSTS = gql`
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const { query } = ctx
-  // const { search: searchString = '', tag = '' } = query
   const searchString = (query.search as string) || ''
   const tag = (query.tag as string) || ''
 
@@ -126,6 +130,7 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
                   title={linkPostEdge.node.title}
                   url={linkPostEdge.node.redirectLink}
                   thumbnailUrl={linkPostEdge.node.thumbnail.url}
+                  tags={linkPostEdge.node.tags}
                 />
               ))}
             </Grid>

@@ -6,6 +6,7 @@ interface Props {
   title: string
   url: string
   thumbnailUrl: string
+  tags: string[]
 }
 
 const OverlayLink = styled.a`
@@ -18,7 +19,7 @@ const OverlayLink = styled.a`
   }
 `
 
-const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl }) => {
+const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl, tags }) => {
   return (
     <div className="rounded-2xl bg-white relative overflow-hidden">
       <Image
