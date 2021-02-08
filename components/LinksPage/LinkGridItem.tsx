@@ -9,6 +9,10 @@ interface Props {
   tags: string[]
 }
 
+interface TagProps {
+  tagValue: string
+}
+
 const OverlayLink = styled.a`
   & > span {
     opacity: 0;
@@ -18,6 +22,20 @@ const OverlayLink = styled.a`
     opacity: 1;
   }
 `
+
+const Tag = styled.div<TagProps>`
+  background-color: ${props => {
+    if (props.tagValue === 'Favorites') return '#34cacf'
+    if (props.tagValue === 'Must Haves') return '#aa5ff5'
+    return '#fc319b'
+  }};
+`
+
+const tagMarks: Record<string, string> = {
+  Favorites: `❤️`,
+  'Must Haves': `⭐️`,
+  Partnerships: `👍`,
+}
 
 const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl, tags }) => {
   return (
@@ -33,6 +51,24 @@ const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl, tags }) => {
         <h3 className="text-pink-darker text-lg md:text-xl font-bold">
           {title}
         </h3>
+      </div>
+
+      <div className="absolute top-4 right-4 grid gap-y-2">
+        {tags.map(tag => (
+          <Tag
+            key="tag"
+            className={clsx(
+              'flex',
+              'text-white text-xs font-bold uppercase',
+              'rounded-lg',
+              'px-3 py-2'
+            )}
+            tagValue={tag}
+          >
+            <span className="mr-3">{tagMarks[tag]}</span>
+            <span>{tag}</span>
+          </Tag>
+        ))}
       </div>
 
       <OverlayLink
