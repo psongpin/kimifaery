@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch('https://www.instagram.com/kimifaery/')
   const body = await res.text()
   const json = await getJSON(body)
-  const instagramMediaData = mapMedia(json)
+  const instagramMediaData = await mapMedia(json)
 
   return {
     props: { instagramMediaData },
