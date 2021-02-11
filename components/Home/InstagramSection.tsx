@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Autoplay, A11y, Pagination } from 'swiper'
+import styled from 'styled-components'
 
 import Button from 'components/Button'
 import { instagramSectionContents } from 'constants/home'
 import { getJSON, mapMedia } from 'lib/instagram'
 import Loader from 'components/Loader'
+
+SwiperCore.use([A11y, Autoplay, Pagination])
 
 type IGData = {
   alt: string
@@ -12,18 +17,39 @@ type IGData = {
   src: string
 }[]
 
+const SwiperFrame = styled.div`
+  .swiper-pagination {
+    bottom: 0;
+  }
+
+  .swiper-pagination-bullet:focus {
+    outline: none;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #fdb6bc;
+  }
+`
+
 const InstagramSection: React.FC = () => {
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const [instagramMediaData, setData] = useState<IGData>([])
 
   useEffectOnce(() => {
     const getIgData = async () => {
-      setLoading(true)
-      const res = await fetch('https://www.instagram.com/kimifaery/')
-      const body = await res.text()
-      const json = await getJSON(body)
-      setData(mapMedia(json))
-      setLoading(false)
+      try {
+        setLoading(true)
+        const res = await fetch('https://www.instagram.com/kimifaery/')
+        const body = await res.text()
+        const json = await getJSON(body)
+        setData(mapMedia(json))
+      } catch (err) {
+        console.log(err)
+        setError('Something went wrong while loading Instagram data.')
+      } finally {
+        setLoading(false)
+      }
     }
 
     getIgData()
@@ -53,14 +79,50 @@ const InstagramSection: React.FC = () => {
           </div>
         )}
 
-        {instagramMediaData.length > 0 && (
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 lg:gap-8 mx-auto w-80 md:w-full max-w-full">
-            {instagramMediaData.map(data => (
-              <a href={data.postUrl} target="_blank" rel="noreferrer">
-                <img key={data.postUrl} src={data.src} alt={data.alt} />
-              </a>
-            ))}
-          </div>
+        {error && (
+          <p className="text-center text-pink-darker text-lg font-bold py-10">
+            {error}
+          </p>
+        )}
+
+        {instagramMediaData.length > 0 && !error && (
+          <SwiperFrame>
+            <Swiper
+              slidesPerView={2}
+              spaceBetween={24}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 1500, disableOnInteraction: false }}
+              breakpoints={{
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 24,
+                },
+                1024: {
+                  slidesPerView: 4,
+                  spaceBetween: 32,
+                },
+                1280: {
+                  slidesPerView: 5,
+                  spaceBetween: 32,
+                },
+              }}
+            >
+              {instagramMediaData.map(data => (
+                <SwiperSlide key={data.postUrl}>
+                  <div className="pb-10">
+                    <a href={data.postUrl} target="_blank" rel="noreferrer">
+                      <img
+                        key={data.postUrl}
+                        src={data.src}
+                        alt={data.alt}
+                        className="mx-auto"
+                      />
+                    </a>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </SwiperFrame>
         )}
       </div>
     </section>
