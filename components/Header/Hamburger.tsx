@@ -1,6 +1,8 @@
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
 
+import getHeaderColor from 'lib/header'
+
 interface Props {
   isOnTop: boolean
   setMenuVisibility: React.Dispatch<React.SetStateAction<boolean>>
@@ -13,12 +15,7 @@ const Hamburger: React.FC<Props> = ({ isOnTop, setMenuVisibility }) => {
     <button
       type="button"
       className={clsx(
-        isOnTop && router.pathname === '/about' && 'text-pink-dark',
-        isOnTop && router.pathname === '/works' && 'text-pink-dark',
-        isOnTop && router.pathname === '/links' && 'text-pink-darker',
-        isOnTop && router.pathname === '/contact' && 'text-pink-dark',
-        isOnTop && router.pathname === '/' && 'text-white',
-        !isOnTop && 'text-white',
+        getHeaderColor(router.pathname, isOnTop),
         'focus:outline-none border-0',
         'transition-all ease-linear duration-300'
       )}

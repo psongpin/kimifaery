@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { headerMainLink } from 'constants/header'
+import getHeaderColor from 'lib/header'
 import Hamburger from './Hamburger'
 import Navigation from './Navigation'
 
@@ -53,12 +54,7 @@ const Header: React.FC = () => {
         <Link href="/">
           <a
             className={clsx(
-              isOnTop && router.pathname === '/about' && 'text-pink-dark',
-              isOnTop && router.pathname === '/works' && 'text-pink-dark',
-              isOnTop && router.pathname === '/links' && 'text-pink-darker',
-              isOnTop && router.pathname === '/contact' && 'text-pink-dark',
-              isOnTop && router.pathname === '/' && 'text-white',
-              !isOnTop && 'text-white',
+              getHeaderColor(router.pathname, isOnTop),
               'text-lg font-medium',
               'flex items-center',
               'transition-all ease-linear duration-300'
