@@ -56,7 +56,7 @@ const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl, tags }) => {
       <div className="absolute top-4 right-4 grid gap-y-2">
         {tags.map(tag => (
           <Tag
-            key="tag"
+            key={tag}
             className={clsx(
               'flex',
               'text-white text-xs font-bold uppercase',
