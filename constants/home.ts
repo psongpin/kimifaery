@@ -69,5 +69,6 @@ export const showcaseContents = {
 
 export const instagramSectionContents = {
   mainHeading: `What's on the gram`,
+  mainDescription: 'Follow me to get more updates',
   buttonText: 'Follow me',
 }

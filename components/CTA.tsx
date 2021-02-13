@@ -8,8 +8,8 @@ interface Props {
 }
 
 const Frame = styled.div`
-  max-width: 1100px;
-  width: 100%;
+  width: 1200px;
+  max-width: 100%;
 `
 
 const CTA: React.FC<Props> = ({ heading, buttonText }) => {

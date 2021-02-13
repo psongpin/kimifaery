@@ -31,7 +31,6 @@
     "react-use": "^15.3.8",
     "sass": "^1.32.7",
     "styled-components": "^5.2.1",
-    "swiper": "^6.4.11",
     "tailwindcss": "^2.0.3"
   },
   "devDependencies": {
