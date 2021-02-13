@@ -32,10 +32,10 @@ interface QueryVariables {
 }
 
 const Grid = styled.section`
-  max-width: 400px;
+  width: 400px;
 
   @media (min-width: 768px) {
-    max-width: initial;
+    width: initial;
   }
 `
 
@@ -137,7 +137,7 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
         {data && (
           <>
             {data.linkPostsConnection.edges.length ? (
-              <Grid className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-16 mt-20 mx-auto w-full">
+              <Grid className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-16 mt-20 mx-auto max-w-full">
                 {data.linkPostsConnection.edges.map(linkPostEdge => (
                   <LinkGridItem
                     key={linkPostEdge.node.id}

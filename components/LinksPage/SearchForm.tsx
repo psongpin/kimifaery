@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Frame = styled.div`
-  max-width: 800px;
+  width: 800px;
 `
 
 const SearchForm: React.FC<Props> = ({ searchString = '' }) => {
@@ -29,7 +29,7 @@ const SearchForm: React.FC<Props> = ({ searchString = '' }) => {
   }
 
   return (
-    <Frame className="w-full mx-auto mb-10">
+    <Frame className="max-w-full mx-auto mb-10">
       <form onSubmit={onSubmit} className="block w-full relative">
         <input
           type="text"

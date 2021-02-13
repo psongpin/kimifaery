@@ -6,8 +6,8 @@ import CTA from 'components/CTA'
 import { showcaseContents } from 'constants/home'
 
 const SkillDisplay = styled.div`
-  max-width: 600px;
-  width: 100%;
+  width: 600px;
+  max-width: 100%;
 `
 
 const PatternFrame = styled.div`

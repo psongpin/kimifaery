@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { bannerContents } from 'constants/home'
 
 const Frame = styled(motion.div)`
-  max-width: 821px;
-  width: 100%;
+  width: 821px;
+  max-width: 100%;
 `
 
 const LetterIcon = styled.span`

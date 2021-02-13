@@ -15,8 +15,8 @@ interface CloseButtonProps {
 }
 
 const Drawer = styled(motion.div)`
-  max-width: 400px;
-  width: 90%;
+  width: 400px;
+  max-width: 90%;
 `
 
 const Overlay = styled(motion.div)``

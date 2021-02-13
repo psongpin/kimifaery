@@ -29,9 +29,10 @@ const getColorByTag = (tag: TagValues): string => {
 }
 
 const Frame = styled.div`
-  max-width: 440px;
+  width: 440px;
+
   @media (min-width: 1024px) {
-    max-width: initial;
+    width: initial;
   }
 `
 
@@ -50,7 +51,8 @@ const Tag = styled.button.attrs({
   background-color: ${props =>
     props.selected ? getColorByTag(props.tagValue) : 'transparent'};
   border-color: ${props => getColorByTag(props.tagValue)};
-  max-width: 200px;
+  width: 200px;
+  max-width: 100%;
   transition: all 0.2s ease-in-out;
 
   &:hover {
@@ -69,7 +71,7 @@ const TagFilters: React.FC = () => {
   }
 
   return (
-    <Frame className="flex justify-center flex-wrap w-full mx-auto">
+    <Frame className="flex justify-center flex-wrap max-w-full mx-auto">
       {TAGS.map(tag => {
         const condition =
           tag === 'All' ? _isEmpty(router.query) : router.query.tag === tag
