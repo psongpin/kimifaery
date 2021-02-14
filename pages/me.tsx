@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 
+import PromoCodes from 'components/PromoCodes'
+
 interface LinkButtonProps {
   url: string
   label: string
@@ -134,11 +136,17 @@ const MePage: React.FC = () => {
         </div>
 
         <Content className="mx-auto mt-32">
-          <div className="grid gap-y-4">
+          <div className="grid gap-y-4 mb-10">
             {LINKS.map(link => (
               <LinkButton key={link.url} {...link} />
             ))}
           </div>
+
+          <h1 className="text-pink-dark text-lg mb-4">
+            <span className="mr-2">💌</span>Promo Codes
+          </h1>
+
+          <PromoCodes />
         </Content>
       </ContentFrame>
     </Frame>

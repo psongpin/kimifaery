@@ -656,6 +656,441 @@ export type ConnectPositionInput = {
   end?: Maybe<Scalars['Boolean']>
 }
 
+/** Discount coupon contents */
+export type Coupon = Node & {
+  __typename?: 'Coupon'
+  /** System stage field */
+  stage: Stage
+  /** Get the document in other stages */
+  documentInStages: Array<Coupon>
+  /** The unique identifier */
+  id: Scalars['ID']
+  /** The time the document was created */
+  createdAt: Scalars['DateTime']
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime']
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>
+  title: Scalars['String']
+  code: Scalars['String']
+  storeUrl: Scalars['String']
+  discountText: Scalars['String']
+  /** List of Coupon versions */
+  history: Array<Version>
+}
+
+/** Discount coupon contents */
+export type CouponDocumentInStagesArgs = {
+  stages?: Array<Stage>
+  includeCurrent?: Scalars['Boolean']
+  inheritLocale?: Scalars['Boolean']
+}
+
+/** Discount coupon contents */
+export type CouponHistoryArgs = {
+  limit?: Scalars['Int']
+  skip?: Scalars['Int']
+  stageOverride?: Maybe<Stage>
+}
+
+/** A connection to a list of items. */
+export type CouponConnection = {
+  __typename?: 'CouponConnection'
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo
+  /** A list of edges. */
+  edges: Array<CouponEdge>
+  aggregate: Aggregate
+}
+
+export type CouponCreateInput = {
+  createdAt?: Maybe<Scalars['DateTime']>
+  updatedAt?: Maybe<Scalars['DateTime']>
+  title: Scalars['String']
+  code: Scalars['String']
+  storeUrl: Scalars['String']
+  discountText: Scalars['String']
+}
+
+/** An edge in a connection. */
+export type CouponEdge = {
+  __typename?: 'CouponEdge'
+  /** The item at the end of the edge. */
+  node: Coupon
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']
+}
+
+/** Identifies documents */
+export type CouponManyWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<CouponWhereInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<CouponWhereInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<CouponWhereInput>>
+  id?: Maybe<Scalars['ID']>
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>
+  createdAt?: Maybe<Scalars['DateTime']>
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>
+  updatedAt?: Maybe<Scalars['DateTime']>
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>
+  publishedAt?: Maybe<Scalars['DateTime']>
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>
+  title?: Maybe<Scalars['String']>
+  /** All values that are not equal to given value. */
+  title_not?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  title_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not contained in given list. */
+  title_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values containing the given string. */
+  title_contains?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  title_not_contains?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  title_starts_with?: Maybe<Scalars['String']>
+  /** All values not starting with the given string. */
+  title_not_starts_with?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  title_ends_with?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  title_not_ends_with?: Maybe<Scalars['String']>
+  code?: Maybe<Scalars['String']>
+  /** All values that are not equal to given value. */
+  code_not?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  code_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not contained in given list. */
+  code_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values containing the given string. */
+  code_contains?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  code_not_contains?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  code_starts_with?: Maybe<Scalars['String']>
+  /** All values not starting with the given string. */
+  code_not_starts_with?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  code_ends_with?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  code_not_ends_with?: Maybe<Scalars['String']>
+  storeUrl?: Maybe<Scalars['String']>
+  /** All values that are not equal to given value. */
+  storeUrl_not?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  storeUrl_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not contained in given list. */
+  storeUrl_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values containing the given string. */
+  storeUrl_contains?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  storeUrl_not_contains?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  storeUrl_starts_with?: Maybe<Scalars['String']>
+  /** All values not starting with the given string. */
+  storeUrl_not_starts_with?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  storeUrl_ends_with?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  storeUrl_not_ends_with?: Maybe<Scalars['String']>
+  discountText?: Maybe<Scalars['String']>
+  /** All values that are not equal to given value. */
+  discountText_not?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  discountText_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not contained in given list. */
+  discountText_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values containing the given string. */
+  discountText_contains?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  discountText_not_contains?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  discountText_starts_with?: Maybe<Scalars['String']>
+  /** All values not starting with the given string. */
+  discountText_not_starts_with?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  discountText_ends_with?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  discountText_not_ends_with?: Maybe<Scalars['String']>
+}
+
+export enum CouponOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  CodeAsc = 'code_ASC',
+  CodeDesc = 'code_DESC',
+  StoreUrlAsc = 'storeUrl_ASC',
+  StoreUrlDesc = 'storeUrl_DESC',
+  DiscountTextAsc = 'discountText_ASC',
+  DiscountTextDesc = 'discountText_DESC',
+}
+
+export type CouponUpdateInput = {
+  title?: Maybe<Scalars['String']>
+  code?: Maybe<Scalars['String']>
+  storeUrl?: Maybe<Scalars['String']>
+  discountText?: Maybe<Scalars['String']>
+}
+
+export type CouponUpdateManyInput = {
+  title?: Maybe<Scalars['String']>
+  code?: Maybe<Scalars['String']>
+  storeUrl?: Maybe<Scalars['String']>
+  discountText?: Maybe<Scalars['String']>
+}
+
+export type CouponUpdateManyWithNestedWhereInput = {
+  /** Document search */
+  where: CouponWhereInput
+  /** Update many input */
+  data: CouponUpdateManyInput
+}
+
+export type CouponUpdateWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: CouponWhereUniqueInput
+  /** Document to update */
+  data: CouponUpdateInput
+}
+
+export type CouponUpsertInput = {
+  /** Create document if it didn't exist */
+  create: CouponCreateInput
+  /** Update document if it exists */
+  update: CouponUpdateInput
+}
+
+export type CouponUpsertWithNestedWhereUniqueInput = {
+  /** Unique document search */
+  where: CouponWhereUniqueInput
+  /** Upsert data */
+  data: CouponUpsertInput
+}
+
+/** Identifies documents */
+export type CouponWhereInput = {
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<CouponWhereInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<CouponWhereInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<CouponWhereInput>>
+  id?: Maybe<Scalars['ID']>
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>
+  createdAt?: Maybe<Scalars['DateTime']>
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['DateTime']>
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['DateTime']>
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['DateTime']>
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['DateTime']>
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['DateTime']>
+  updatedAt?: Maybe<Scalars['DateTime']>
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['DateTime']>
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['DateTime']>
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['DateTime']>
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['DateTime']>
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['DateTime']>
+  publishedAt?: Maybe<Scalars['DateTime']>
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['DateTime']>
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['DateTime']>>
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['DateTime']>
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['DateTime']>
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['DateTime']>
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['DateTime']>
+  title?: Maybe<Scalars['String']>
+  /** All values that are not equal to given value. */
+  title_not?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  title_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not contained in given list. */
+  title_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values containing the given string. */
+  title_contains?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  title_not_contains?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  title_starts_with?: Maybe<Scalars['String']>
+  /** All values not starting with the given string. */
+  title_not_starts_with?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  title_ends_with?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  title_not_ends_with?: Maybe<Scalars['String']>
+  code?: Maybe<Scalars['String']>
+  /** All values that are not equal to given value. */
+  code_not?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  code_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not contained in given list. */
+  code_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values containing the given string. */
+  code_contains?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  code_not_contains?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  code_starts_with?: Maybe<Scalars['String']>
+  /** All values not starting with the given string. */
+  code_not_starts_with?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  code_ends_with?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  code_not_ends_with?: Maybe<Scalars['String']>
+  storeUrl?: Maybe<Scalars['String']>
+  /** All values that are not equal to given value. */
+  storeUrl_not?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  storeUrl_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not contained in given list. */
+  storeUrl_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values containing the given string. */
+  storeUrl_contains?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  storeUrl_not_contains?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  storeUrl_starts_with?: Maybe<Scalars['String']>
+  /** All values not starting with the given string. */
+  storeUrl_not_starts_with?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  storeUrl_ends_with?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  storeUrl_not_ends_with?: Maybe<Scalars['String']>
+  discountText?: Maybe<Scalars['String']>
+  /** All values that are not equal to given value. */
+  discountText_not?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  discountText_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not contained in given list. */
+  discountText_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values containing the given string. */
+  discountText_contains?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  discountText_not_contains?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  discountText_starts_with?: Maybe<Scalars['String']>
+  /** All values not starting with the given string. */
+  discountText_not_starts_with?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  discountText_ends_with?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  discountText_not_ends_with?: Maybe<Scalars['String']>
+}
+
+/** References Coupon record uniquely */
+export type CouponWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>
+}
+
 export enum DocumentFileTypes {
   Jpg = 'jpg',
   Odp = 'odp',
@@ -1248,6 +1683,46 @@ export type Mutation = {
    * @deprecated Please use the new paginated many mutation (unpublishManyAssetsConnection)
    */
   unpublishManyAssets: BatchPayload
+  /** Create one coupon */
+  createCoupon?: Maybe<Coupon>
+  /** Update one coupon */
+  updateCoupon?: Maybe<Coupon>
+  /** Delete one coupon from _all_ existing stages. Returns deleted document. */
+  deleteCoupon?: Maybe<Coupon>
+  /** Upsert one coupon */
+  upsertCoupon?: Maybe<Coupon>
+  /** Publish one coupon */
+  publishCoupon?: Maybe<Coupon>
+  /** Unpublish one coupon from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishCoupon?: Maybe<Coupon>
+  /** Update many Coupon documents */
+  updateManyCouponsConnection: CouponConnection
+  /** Delete many Coupon documents, return deleted documents */
+  deleteManyCouponsConnection: CouponConnection
+  /** Publish many Coupon documents */
+  publishManyCouponsConnection: CouponConnection
+  /** Find many Coupon documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyCouponsConnection: CouponConnection
+  /**
+   * Update many coupons
+   * @deprecated Please use the new paginated many mutation (updateManyCouponsConnection)
+   */
+  updateManyCoupons: BatchPayload
+  /**
+   * Delete many Coupon documents
+   * @deprecated Please use the new paginated many mutation (deleteManyCouponsConnection)
+   */
+  deleteManyCoupons: BatchPayload
+  /**
+   * Publish many Coupon documents
+   * @deprecated Please use the new paginated many mutation (publishManyCouponsConnection)
+   */
+  publishManyCoupons: BatchPayload
+  /**
+   * Unpublish many Coupon documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyCouponsConnection)
+   */
+  unpublishManyCoupons: BatchPayload
   /** Create one linkPost */
   createLinkPost?: Maybe<LinkPost>
   /** Update one linkPost */
@@ -1393,6 +1868,94 @@ export type MutationUnpublishManyAssetsArgs = {
   unpublishBase?: Maybe<Scalars['Boolean']>
 }
 
+export type MutationCreateCouponArgs = {
+  data: CouponCreateInput
+}
+
+export type MutationUpdateCouponArgs = {
+  where: CouponWhereUniqueInput
+  data: CouponUpdateInput
+}
+
+export type MutationDeleteCouponArgs = {
+  where: CouponWhereUniqueInput
+}
+
+export type MutationUpsertCouponArgs = {
+  where: CouponWhereUniqueInput
+  upsert: CouponUpsertInput
+}
+
+export type MutationPublishCouponArgs = {
+  where: CouponWhereUniqueInput
+  to?: Array<Stage>
+}
+
+export type MutationUnpublishCouponArgs = {
+  where: CouponWhereUniqueInput
+  from?: Array<Stage>
+}
+
+export type MutationUpdateManyCouponsConnectionArgs = {
+  where?: Maybe<CouponManyWhereInput>
+  data: CouponUpdateManyInput
+  skip?: Maybe<Scalars['Int']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  before?: Maybe<Scalars['ID']>
+  after?: Maybe<Scalars['ID']>
+}
+
+export type MutationDeleteManyCouponsConnectionArgs = {
+  where?: Maybe<CouponManyWhereInput>
+  skip?: Maybe<Scalars['Int']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  before?: Maybe<Scalars['ID']>
+  after?: Maybe<Scalars['ID']>
+}
+
+export type MutationPublishManyCouponsConnectionArgs = {
+  where?: Maybe<CouponManyWhereInput>
+  from?: Maybe<Stage>
+  to?: Array<Stage>
+  skip?: Maybe<Scalars['Int']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  before?: Maybe<Scalars['ID']>
+  after?: Maybe<Scalars['ID']>
+}
+
+export type MutationUnpublishManyCouponsConnectionArgs = {
+  where?: Maybe<CouponManyWhereInput>
+  stage?: Maybe<Stage>
+  from?: Array<Stage>
+  skip?: Maybe<Scalars['Int']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  before?: Maybe<Scalars['ID']>
+  after?: Maybe<Scalars['ID']>
+}
+
+export type MutationUpdateManyCouponsArgs = {
+  where?: Maybe<CouponManyWhereInput>
+  data: CouponUpdateManyInput
+}
+
+export type MutationDeleteManyCouponsArgs = {
+  where?: Maybe<CouponManyWhereInput>
+}
+
+export type MutationPublishManyCouponsArgs = {
+  where?: Maybe<CouponManyWhereInput>
+  to?: Array<Stage>
+}
+
+export type MutationUnpublishManyCouponsArgs = {
+  where?: Maybe<CouponManyWhereInput>
+  from?: Array<Stage>
+}
+
 export type MutationCreateLinkPostArgs = {
   data: LinkPostCreateInput
 }
@@ -1523,6 +2086,14 @@ export type Query = {
   assetsConnection: AssetConnection
   /** Retrieve document version */
   assetVersion?: Maybe<DocumentVersion>
+  /** Retrieve multiple coupons */
+  coupons: Array<Coupon>
+  /** Retrieve a single coupon */
+  coupon?: Maybe<Coupon>
+  /** Retrieve multiple coupons using the Relay connection interface */
+  couponsConnection: CouponConnection
+  /** Retrieve document version */
+  couponVersion?: Maybe<DocumentVersion>
   /** Retrieve multiple linkPosts */
   linkPosts: Array<LinkPost>
   /** Retrieve a single linkPost */
@@ -1570,6 +2141,40 @@ export type QueryAssetsConnectionArgs = {
 }
 
 export type QueryAssetVersionArgs = {
+  where: VersionWhereInput
+}
+
+export type QueryCouponsArgs = {
+  where?: Maybe<CouponWhereInput>
+  orderBy?: Maybe<CouponOrderByInput>
+  skip?: Maybe<Scalars['Int']>
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  stage?: Stage
+  locales?: Array<Locale>
+}
+
+export type QueryCouponArgs = {
+  where: CouponWhereUniqueInput
+  stage?: Stage
+  locales?: Array<Locale>
+}
+
+export type QueryCouponsConnectionArgs = {
+  where?: Maybe<CouponWhereInput>
+  orderBy?: Maybe<CouponOrderByInput>
+  skip?: Maybe<Scalars['Int']>
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  stage?: Stage
+  locales?: Array<Locale>
+}
+
+export type QueryCouponVersionArgs = {
   where: VersionWhereInput
 }
 
