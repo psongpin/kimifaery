@@ -11,6 +11,8 @@ import getHeaderColor from 'lib/header'
 import Hamburger from './Hamburger'
 import Navigation from './Navigation'
 
+const noHeaderRoutes = ['/me']
+
 const HeaderFrame = styled.header`
   width: 1920px;
   max-width: 100%;
@@ -40,6 +42,8 @@ const Header: React.FC = () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete)
     }
   })
+
+  if (noHeaderRoutes.includes(router.pathname)) return null
 
   return (
     <HeaderFrame

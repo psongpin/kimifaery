@@ -1,9 +1,16 @@
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { footerTagline, footerLinks } from 'constants/footer'
 
+const noFootererRoutes = ['/me']
+
 const Footer: React.FC = () => {
+  const router = useRouter()
+
+  if (noFootererRoutes.includes(router.pathname)) return null
+
   return (
     <footer
       className={clsx('mt-auto py-12', 'bg-pink-hot text-white', 'relative')}
