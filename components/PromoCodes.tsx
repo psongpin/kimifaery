@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import clsx from 'clsx'
 import styled from 'styled-components'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import Loader from 'components/Loader'
 import { Query, Coupon } from 'types/graphcms'
@@ -46,6 +48,20 @@ const PromoCode: React.FC<Coupon> = ({
   code,
   storeUrl,
 }) => {
+  const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => {
+        setCopied(false)
+      }, 2000)
+
+      return () => clearTimeout(timer)
+    }
+
+    return undefined
+  }, [copied])
+
   return (
     <div className={clsx('bg-white', 'rounded-xl', 'p-4')}>
       <div className="flex items-start">
@@ -82,20 +98,22 @@ const PromoCode: React.FC<Coupon> = ({
         </div>
       </div>
 
-      <button
-        type="button"
-        className={clsx(
-          'bg-pink-dark',
-          'rounded-full',
-          'w-full',
-          'text-white text-center text-sm uppercase',
-          'p-2 mt-4',
-          'hover:opacity-75',
-          'transition-all ease-in-out duration-200'
-        )}
-      >
-        copy
-      </button>
+      <CopyToClipboard text={code} onCopy={() => setCopied(true)}>
+        <button
+          type="button"
+          className={clsx(
+            'bg-pink-dark',
+            'rounded-full',
+            'w-full',
+            'text-white text-center text-sm uppercase',
+            'p-2 mt-4',
+            'hover:opacity-75 focus:outline-none',
+            'transition-all ease-in-out duration-200'
+          )}
+        >
+          {copied ? 'copied' : 'copy'}
+        </button>
+      </CopyToClipboard>
     </div>
   )
 }
