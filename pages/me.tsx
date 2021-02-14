@@ -2,8 +2,10 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { NextSeo } from 'next-seo'
 
 import PromoCodes from 'components/PromoCodes'
+import config from 'constants/seo'
 
 interface LinkButtonProps {
   url: string
@@ -123,33 +125,45 @@ const LinkButton: React.FC<LinkButtonProps> = ({
 
 const MePage: React.FC = () => {
   return (
-    <Frame className="flex-1 flex mx-auto bg-white">
-      <ContentFrame className="flex-1 mt-32 bg-pink-pale rounded-tl-3xl rounded-tr-3xl relative px-6">
-        <div className="absolute top-0 inset-x-0 flex items-center justify-center transform -translate-y-1/2">
-          <Image
-            src="/images/me-logo.svg"
-            alt="Hello Kimmy"
-            width={246}
-            height={246}
-            layout="fixed"
-          />
-        </div>
-
-        <Content className="mx-auto mt-32">
-          <div className="grid gap-y-4 mb-10">
-            {LINKS.map(link => (
-              <LinkButton key={link.url} {...link} />
-            ))}
+    <>
+      <NextSeo
+        {...config}
+        title="Hello Kimmy - Me"
+        canonical="https://hellokimmy.com/me/"
+        openGraph={{
+          ...config.openGraph,
+          title: 'Hello Kimmy - Me',
+          url: 'https://hellokimmy.com/me/',
+        }}
+      />
+      <Frame className="flex-1 flex mx-auto bg-white">
+        <ContentFrame className="flex-1 mt-32 bg-pink-pale rounded-tl-3xl rounded-tr-3xl relative px-6">
+          <div className="absolute top-0 inset-x-0 flex items-center justify-center transform -translate-y-1/2">
+            <Image
+              src="/images/me-logo.svg"
+              alt="Hello Kimmy"
+              width={246}
+              height={246}
+              layout="fixed"
+            />
           </div>
 
-          <h1 className="text-pink-dark text-lg mb-4">
-            <span className="mr-2">💌</span>Promo Codes
-          </h1>
+          <Content className="mx-auto mt-32">
+            <div className="grid gap-y-4 mb-10">
+              {LINKS.map(link => (
+                <LinkButton key={link.url} {...link} />
+              ))}
+            </div>
 
-          <PromoCodes />
-        </Content>
-      </ContentFrame>
-    </Frame>
+            <h1 className="text-pink-dark text-lg mb-4">
+              <span className="mr-2">💌</span>Promo Codes
+            </h1>
+
+            <PromoCodes />
+          </Content>
+        </ContentFrame>
+      </Frame>
+    </>
   )
 }
 
