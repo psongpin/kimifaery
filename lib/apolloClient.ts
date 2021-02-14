@@ -37,6 +37,16 @@ const createApolloClient = () => {
                 }
               },
             },
+            couponsConnection: {
+              keyArgs: false,
+              merge(existing, incoming) {
+                if (!existing) return incoming
+                return {
+                  ...incoming,
+                  edges: [...existing.edges, ...incoming.edges],
+                }
+              },
+            },
           },
         },
       },

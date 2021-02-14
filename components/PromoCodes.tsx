@@ -17,6 +17,11 @@ interface QueryVariables {
 const GET_COUPONS = gql`
   query getCoupons($first: Int, $after: String) {
     couponsConnection(first: $first, after: $after) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        pageSize
+      }
       edges {
         cursor
         node {
@@ -56,7 +61,7 @@ const PromoCode: React.FC<Coupon> = ({
               href={storeUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center underline"
+              className="flex items-center font-bold underline"
             >
               {title}
               <svg
@@ -96,12 +101,13 @@ const PromoCode: React.FC<Coupon> = ({
 }
 
 const PromoCodes: React.FC = () => {
-  const { data, loading, error } = useQuery<QueryData, QueryVariables>(
-    GET_COUPONS,
-    {
-      variables: { first: 10 },
-    }
-  )
+  const { data, loading, error, fetchMore } = useQuery<
+    QueryData,
+    QueryVariables
+  >(GET_COUPONS, {
+    variables: { first: 10 },
+    notifyOnNetworkStatusChange: true,
+  })
 
   if (loading) {
     return (
@@ -128,6 +134,30 @@ const PromoCodes: React.FC = () => {
             {couponsConnection.edges.map(couponEdge => (
               <PromoCode key={couponEdge.node.id} {...couponEdge.node} />
             ))}
+
+            {couponsConnection.pageInfo.hasNextPage && (
+              <button
+                type="button"
+                className={clsx(
+                  'bg-pink-dark',
+                  'rounded-full',
+                  'w-full',
+                  'text-white text-center text-sm uppercase',
+                  'p-2 mt-4',
+                  'hover:opacity-75',
+                  'transition-all ease-in-out duration-200'
+                )}
+                onClick={() => {
+                  fetchMore({
+                    variables: {
+                      after: couponsConnection.pageInfo.endCursor,
+                    },
+                  })
+                }}
+              >
+                load more
+              </button>
+            )}
           </>
         ) : (
           <p className="text-pink-darker text-center font-bold">

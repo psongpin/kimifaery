@@ -124,7 +124,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({
 const MePage: React.FC = () => {
   return (
     <Frame className="flex-1 flex mx-auto bg-white">
-      <ContentFrame className="flex-1 mt-48 bg-pink-pale rounded-tl-3xl rounded-tr-3xl relative px-6">
+      <ContentFrame className="flex-1 mt-32 bg-pink-pale rounded-tl-3xl rounded-tr-3xl relative px-6">
         <div className="absolute top-0 inset-x-0 flex items-center justify-center transform -translate-y-1/2">
           <Image
             src="/images/me-logo.svg"
