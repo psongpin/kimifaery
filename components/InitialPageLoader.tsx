@@ -1,8 +1,8 @@
-import { useState } from 'react'
 import clsx from 'clsx'
 import styled, { keyframes } from 'styled-components'
-import { useEffectOnce } from 'react-use'
 import { AnimatePresence, motion } from 'framer-motion'
+
+import { usePageLoad } from 'contexts/initialPageLoad'
 import Loader from './Loader'
 
 const LoaderOverlay = styled(motion.div)``
@@ -25,21 +25,8 @@ const LoadingText = styled.div`
 `
 
 const InitialPageLoader: React.FC = () => {
-  const [isInitiallyLoading, setIsInitiallyLoading] = useState(true)
+  const { isInitiallyLoading } = usePageLoad()
 
-  useEffectOnce(() => {
-    let timer: NodeJS.Timeout
-
-    window.onload = () => {
-      timer = setTimeout(() => {
-        setIsInitiallyLoading(false)
-      }, 1700)
-    }
-
-    return () => {
-      if (timer) clearTimeout(timer)
-    }
-  })
   return (
     <AnimatePresence>
       {isInitiallyLoading && (
