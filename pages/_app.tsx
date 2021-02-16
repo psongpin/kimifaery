@@ -8,6 +8,7 @@ import { DefaultSeo } from 'next-seo'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
+import InitialPageLoader from 'components/InitialPageLoader'
 import { useApollo } from 'lib/apolloClient'
 import config from 'constants/seo'
 import theme from 'styles/theme'
@@ -44,6 +45,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
+
+          <InitialPageLoader />
+
           <div className="page-background bg-pink-pale">
             <div className="page-root flex flex-col min-h-screen relative">
               <Header />

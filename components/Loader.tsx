@@ -1,61 +1,69 @@
 import styled, { keyframes } from 'styled-components'
 
 // keyframes
-const drop = keyframes`
-  0% {
-    top: 0%;
-    left: 50%; 
+const foldCube = keyframes`
+  0%,
+  10% {
+    transform: perspective(140px) rotateX(-180deg);
+    opacity: 0;
   }
-
-  50% {
-    top: 50%;
-    left: 50%;
+  25%,
+  75% {
+    transform: perspective(140px) rotateX(0deg);
+    opacity: 1;
   }
-
+  90%,
   100% {
-    top: 50%;
-    left: 50%;
-  }
-`
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(-360deg);
+    transform: perspective(140px) rotateY(180deg);
+    opacity: 0;
   }
 `
 
 // subcomponents
 const Frame = styled.div`
-  width: 100px;
-  height: 100px;
-  animation: ${rotate} 4s steps(4) infinite;
+  margin: 0;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  transform: rotateZ(45deg);
 `
 
-const Box = styled.div`
-  position: absolute;
-  background-color: ${props => props.theme.colors.pink.hot};
+const Cube = styled.div`
+  float: left;
+  width: 50%;
+  height: 50%;
+  position: relative;
+  transform: scale(1.1);
 
-  &:first-child {
+  &:before {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
+    width: 100%;
     height: 100%;
+    background-color: ${props => props.theme.colors.pink.hot};
+    animation: ${foldCube} 2.4s infinite linear both;
+    transform-origin: 100% 100%;
   }
 
-  &:last-child {
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 50%;
-
-    animation-name: ${drop};
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier;
-    animation-iteration-count: infinite;
+  &.sk-cube2 {
+    transform: scale(1.1) rotateZ(90deg);
+  }
+  &.sk-cube3 {
+    transform: scale(1.1) rotateZ(180deg);
+  }
+  &.sk-cube4 {
+    transform: scale(1.1) rotateZ(270deg);
+  }
+  &.sk-cube2:before {
+    animation-delay: 0.3s;
+  }
+  &.sk-cube3:before {
+    animation-delay: 0.6s;
+  }
+  &.sk-cube4:before {
+    animation-delay: 0.9s;
   }
 `
 
@@ -63,8 +71,10 @@ const Box = styled.div`
 const Loader: React.FC = () => {
   return (
     <Frame>
-      <Box className="box box1" />
-      <Box className="box box2" />
+      <Cube className="sk-cube1" />
+      <Cube className="sk-cube2" />
+      <Cube className="sk-cube4" />
+      <Cube className="sk-cube3" />
     </Frame>
   )
 }
