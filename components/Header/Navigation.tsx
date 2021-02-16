@@ -93,7 +93,8 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
                       router.pathname === link.url && 'bg-pink-dark',
                       'hover:bg-pink-dark',
                       'text-xl text-white text-center',
-                      'transition-all ease-linear duration-200'
+                      'transition-all ease-linear duration-200',
+                      link.disabled && 'pointer-events-none opacity-40'
                     )}
                   >
                     {link.label}

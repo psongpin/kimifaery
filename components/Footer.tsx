@@ -43,7 +43,12 @@ const Footer: React.FC = () => {
               {footerLinks.map(link => (
                 <li key={link.url} className="mr-5 md:mr-12 lg:mr-20 last:mr-0">
                   <Link href={link.url}>
-                    <a className="hover:opacity-50 transition-all ease-linear duration-200">
+                    <a
+                      className={clsx(
+                        'hover:opacity-50 transition-all ease-linear duration-200',
+                        link.disabled && 'pointer-events-none opacity-40'
+                      )}
+                    >
                       {link.label}
                     </a>
                   </Link>
