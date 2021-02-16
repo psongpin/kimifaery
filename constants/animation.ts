@@ -22,3 +22,14 @@ export const fadeUpDownVariants: Variants = {
 export const fadeUpDownProps = {
   variants: fadeUpDownVariants,
 }
+
+export const basicFadeUpDownVariants: Variants = {
+  fadeUp: {
+    y: -30,
+    opacity: 0,
+  },
+  fadeDown: {
+    y: 0,
+    opacity: 1,
+  },
+}

@@ -5,7 +5,7 @@ import { InView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 
 import { introductionContents } from 'constants/home'
-import { fadeUpDownProps } from 'constants/animation'
+import { basicFadeUpDownVariants, fadeUpDownProps } from 'constants/animation'
 import { usePageLoad } from 'contexts/initialPageLoad'
 
 const PatternFrame = styled.div`
@@ -121,7 +121,7 @@ const IntroductionSection: React.FC = () => {
             <InView threshold={0.2} key={content.title}>
               {({ inView, ref }) => (
                 <motion.div
-                  {...fadeUpDownProps}
+                  variants={basicFadeUpDownVariants}
                   initial="fadeUp"
                   animate={
                     inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'
@@ -129,8 +129,7 @@ const IntroductionSection: React.FC = () => {
                   transition={{
                     staggerChildren: 0.3,
                     delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
-                    // delay: isInitiallyLoading ? pageLoadDelay : 0,
-                    when: 'beforeChildren',
+                    duration: 0.8,
                   }}
                   ref={ref}
                   className={clsx(
