@@ -29,6 +29,7 @@ const Banner: React.FC = () => {
         >
           <Image
             src="/images/banner-image.jpg"
+            alt="wallpaper"
             layout="fill"
             objectFit="cover"
             className="z-0"

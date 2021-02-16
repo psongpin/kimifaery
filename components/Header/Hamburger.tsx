@@ -21,6 +21,7 @@ const Hamburger: React.FC<Props> = ({ isOnTop, setMenuVisibility }) => {
       )}
       onClick={() => setMenuVisibility(true)}
     >
+      <span className="hidden">menu</span>
       <svg
         className="w-8 h-8"
         fill="currentColor"
