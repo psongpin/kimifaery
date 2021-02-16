@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 import { headerLinks } from 'constants/header'
+import { fadeUpDownProps } from 'constants/animation'
 
 interface Props {
   setMenuVisibility: React.Dispatch<React.SetStateAction<boolean>>
@@ -50,7 +51,7 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ ease: 'linear', duration: 0.2 }}
+        transition={{ ease: 'easeInOut', duration: 0.2 }}
         className={clsx(
           'fixed inset-0 z-20',
           'w-screen h-screen bg-gray-900 bg-opacity-50',
@@ -62,7 +63,7 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
         initial={{ x: '100%', opacity: 0 }}
         animate={{ x: '0%', opacity: 1 }}
         exit={{ x: '100%' }}
-        transition={{ ease: 'linear', duration: 0.2 }}
+        transition={{ ease: 'easeInOut', duration: 0.2 }}
         className={clsx(
           'fixed top-0 right-0 z-20',
           'bg-pink-hot',
@@ -75,9 +76,15 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
         </div>
 
         <nav className="mt-8">
-          <ul>
+          <motion.ul
+            initial="fadeUp"
+            animate="fadeDown"
+            transition={{
+              staggerChildren: 0.3,
+            }}
+          >
             {headerLinks.map(link => (
-              <li key={link.url}>
+              <motion.li key={link.url} {...fadeUpDownProps}>
                 <Link href={link.url}>
                   <a
                     className={clsx(
@@ -92,9 +99,9 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
                     {link.label}
                   </a>
                 </Link>
-              </li>
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         </nav>
       </Drawer>
     </>

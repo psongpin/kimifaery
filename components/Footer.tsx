@@ -1,18 +1,14 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { motion, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { InView } from 'react-intersection-observer'
 
 import { footerTagline, footerLinks } from 'constants/footer'
 import { usePageLoad } from 'contexts/initialPageLoad'
+import { fadeUpDownProps } from 'constants/animation'
 
 const noFootererRoutes = ['/me']
-
-const animationVariants: Variants = {
-  out: { opacity: 0, y: -30 },
-  in: { opacity: 1, y: 0 },
-}
 
 const Footer: React.FC = () => {
   const router = useRouter()
@@ -33,12 +29,10 @@ const Footer: React.FC = () => {
           )}
         >
           <motion.div
-            variants={animationVariants}
-            initial="out"
-            animate={inView ? 'in' : 'out'}
+            {...fadeUpDownProps}
+            initial="fadeUp"
+            animate={inView ? 'fadeDown' : 'fadeUp'}
             transition={{
-              duration: 0.8,
-              easings: ['easeIn', 'easeOut'],
               delay: isInitiallyLoading ? pageLoadDelay : 0,
             }}
             className="container flex flex-col md:flex-row items-center justify-between"

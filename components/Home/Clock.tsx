@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 import { format } from 'date-fns'
+import { motion } from 'framer-motion'
+import { fadeUpDownProps } from 'constants/animation'
 
 const Clock: React.FC = () => {
-  const [currentTime, setCurrentTime] = useState('')
-  const [currentDate, setCurrentDate] = useState('')
+  const intial = Date.now()
+  const [currentTime, setCurrentTime] = useState(format(intial, 'p'))
+  const [currentDate, setCurrentDate] = useState(format(intial, 'PPPP'))
 
   useEffectOnce(() => {
     const tick = setInterval(() => {
@@ -20,15 +23,13 @@ const Clock: React.FC = () => {
     return () => clearInterval(tick)
   })
 
-  if (!currentTime || !currentDate) return null
-
   return (
-    <div className="text-center text-white">
+    <motion.div {...fadeUpDownProps} className="text-center text-white">
       <div className="text-5xl md:text-6xl font-extrabold mb-4">
         {currentTime}
       </div>
       <div className="text-xl">{currentDate}</div>
-    </div>
+    </motion.div>
   )
 }
 

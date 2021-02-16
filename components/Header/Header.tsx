@@ -1,12 +1,7 @@
 import { useState } from 'react'
 import { useEffectOnce } from 'react-use'
 import clsx from 'clsx'
-import {
-  AnimatePresence,
-  motion,
-  useViewportScroll,
-  Variants,
-} from 'framer-motion'
+import { AnimatePresence, motion, useViewportScroll } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
@@ -14,16 +9,12 @@ import { InView } from 'react-intersection-observer'
 
 import { usePageLoad } from 'contexts/initialPageLoad'
 import { headerMainLink } from 'constants/header'
+import { fadeUpDownProps } from 'constants/animation'
 import getHeaderColor from 'lib/header'
 import Hamburger from './Hamburger'
 import Navigation from './Navigation'
 
 const noHeaderRoutes = ['/me']
-
-const animationVariants: Variants = {
-  out: { y: -30, opacity: 0 },
-  in: { y: 0, opacity: 1 },
-}
 
 const HeaderFrame = styled(motion.header)`
   width: 1920px;
@@ -62,12 +53,10 @@ const Header: React.FC = () => {
     <InView>
       {({ inView, ref }) => (
         <HeaderFrame
-          variants={animationVariants}
-          initial="out"
-          animate={inView ? 'in' : 'out'}
+          {...fadeUpDownProps}
+          initial="fadeUp"
+          animate={inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'}
           transition={{
-            duration: 0.8,
-            easings: ['easeIn', 'easeOut'],
             delay: isInitiallyLoading ? pageLoadDelay : 0,
           }}
           ref={ref}
@@ -75,7 +64,7 @@ const Header: React.FC = () => {
             'fixed top-0 inset-x-0 z-20',
             'py-6 mx-auto',
             isOnTop ? 'bg-transparent' : 'bg-pink-hot shadow-lg',
-            'transition-all ease-linear duration-300'
+            'transition-colors ease-linear duration-300'
           )}
         >
           <div className="container flex items-center justify-between">
