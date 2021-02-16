@@ -21,7 +21,7 @@ const InstagramSection: React.FC = () => {
     <section className="pb-32 relative text-center md:text-left">
       <div className="container">
         <ContentContainer className="mx-auto grid grid-cols-12 gap-x-4 lg:gap-x-8 gap-y-20">
-          <InView threshold={0.5}>
+          <InView threshold={0.2}>
             {({ inView, ref }) => (
               <motion.div
                 ref={ref}
@@ -64,7 +64,7 @@ const InstagramSection: React.FC = () => {
             )}
           </InView>
 
-          <InView threshold={0.5}>
+          <InView threshold={0.2}>
             {({ inView, ref }) => (
               <motion.div
                 {...fadeUpDownProps}

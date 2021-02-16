@@ -2,8 +2,11 @@ import Image from 'next/image'
 import clsx from 'clsx'
 import styled from 'styled-components'
 import { InView } from 'react-intersection-observer'
+import { motion } from 'framer-motion'
 
 import { introductionContents } from 'constants/home'
+import { fadeUpDownProps } from 'constants/animation'
+import { usePageLoad } from 'contexts/initialPageLoad'
 
 const PatternFrame = styled.div`
   width: 100%;
@@ -28,8 +31,6 @@ const Pattern: React.FC = () => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1400 292"
-        // width={1400}
-        // height={292}
         className="w-full"
       >
         <style />
@@ -45,6 +46,8 @@ const Pattern: React.FC = () => {
 }
 
 const IntroductionSection: React.FC = () => {
+  const { pageLoadDelay, isInitiallyLoading } = usePageLoad()
+
   return (
     <section className="pt-24 md:pt-28 relative overflow-hidden">
       <Pattern />
@@ -68,23 +71,44 @@ const IntroductionSection: React.FC = () => {
       </InView>
 
       <div className="container relative">
-        <div className="text-center md:text-left">
-          <Image
-            src="/images/wave.gif"
-            alt="wave"
-            layout="intrinsic"
-            width={180}
-            height={174}
-          />
+        <InView threshold={0.2}>
+          {({ inView, ref }) => (
+            <motion.div
+              ref={ref}
+              initial="fadeUp"
+              animate={inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'}
+              transition={{
+                staggerChildren: 0.3,
+                delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
+              }}
+              className="text-center md:text-left"
+            >
+              <motion.div {...fadeUpDownProps}>
+                <Image
+                  src="/images/wave.gif"
+                  alt="wave"
+                  layout="intrinsic"
+                  width={180}
+                  height={174}
+                />
+              </motion.div>
 
-          <h1 className="text-pink-darker text-4xl md:text-5xl font-bold mt-4 mb-8">
-            {introductionContents.mainHeading}
-          </h1>
+              <motion.h1
+                {...fadeUpDownProps}
+                className="text-pink-darker text-4xl md:text-5xl font-bold mt-4 mb-8"
+              >
+                {introductionContents.mainHeading}
+              </motion.h1>
 
-          <h2 className="text-pink-darker text-4xl md:text-5xl font-bold">
-            {introductionContents.subHeading}
-          </h2>
-        </div>
+              <motion.h2
+                {...fadeUpDownProps}
+                className="text-pink-darker text-4xl md:text-5xl font-bold"
+              >
+                {introductionContents.subHeading}
+              </motion.h2>
+            </motion.div>
+          )}
+        </InView>
 
         <div
           className={clsx(
@@ -94,37 +118,58 @@ const IntroductionSection: React.FC = () => {
           )}
         >
           {introductionContents.boxesContents.map((content, index) => (
-            <div
-              key={content.title}
-              className={clsx(
-                index === 0 && 'bg-blue-green',
-                index === 1 && 'bg-pink-bright',
-                index === 2 && 'bg-yellow-pale',
-                'rounded-2xl',
-                'flex flex-col',
-                'overflow-hidden'
+            <InView threshold={0.2} key={content.title}>
+              {({ inView, ref }) => (
+                <motion.div
+                  {...fadeUpDownProps}
+                  initial="fadeUp"
+                  animate={
+                    inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'
+                  }
+                  transition={{
+                    staggerChildren: 0.3,
+                    delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
+                    // delay: isInitiallyLoading ? pageLoadDelay : 0,
+                    when: 'beforeChildren',
+                  }}
+                  ref={ref}
+                  className={clsx(
+                    index === 0 && 'bg-blue-green',
+                    index === 1 && 'bg-pink-bright',
+                    index === 2 && 'bg-yellow-pale',
+                    'rounded-2xl',
+                    'flex flex-col',
+                    'overflow-hidden'
+                  )}
+                >
+                  <div className="pt-12 px-4 lg:px-8">
+                    <motion.h3
+                      {...fadeUpDownProps}
+                      className="text-pink-darker font-bold text-3xl mb-5"
+                    >
+                      {content.title}
+                    </motion.h3>
+
+                    <motion.p
+                      {...fadeUpDownProps}
+                      className="text-lg text-gray-semi-dark"
+                    >
+                      {content.description}
+                    </motion.p>
+                  </div>
+
+                  <motion.div {...fadeUpDownProps} className="mt-auto pt-12">
+                    <Image
+                      src={content.image}
+                      alt={content.title}
+                      width={content.imgW}
+                      height={content.imgH}
+                      layout="responsive"
+                    />
+                  </motion.div>
+                </motion.div>
               )}
-            >
-              <div className="pt-12 px-4 lg:px-8">
-                <h3 className="text-pink-darker font-bold text-3xl mb-5">
-                  {content.title}
-                </h3>
-
-                <p className="text-lg text-gray-semi-dark">
-                  {content.description}
-                </p>
-              </div>
-
-              <div className="mt-auto pt-12">
-                <Image
-                  src={content.image}
-                  alt={content.title}
-                  width={content.imgW}
-                  height={content.imgH}
-                  layout="responsive"
-                />
-              </div>
-            </div>
+            </InView>
           ))}
         </div>
       </div>
