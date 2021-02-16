@@ -6,8 +6,8 @@ import { motion } from 'framer-motion'
 
 import Button from 'components/Button'
 import { instagramSectionContents } from 'constants/home'
-import { usePageLoad } from 'contexts/initialPageLoad'
 import { fadeUpDownProps } from 'constants/animation'
+import { usePageLoad } from 'contexts/initialPageLoad'
 
 const ContentContainer = styled.div`
   width: 1200px;
@@ -21,30 +21,37 @@ const InstagramSection: React.FC = () => {
     <section className="pb-32 relative text-center md:text-left">
       <div className="container">
         <ContentContainer className="mx-auto grid grid-cols-12 gap-x-4 lg:gap-x-8 gap-y-20">
-          <InView>
+          <InView threshold={0.5}>
             {({ inView, ref }) => (
               <motion.div
-                {...fadeUpDownProps}
+                ref={ref}
                 initial="fadeUp"
                 animate={inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'}
                 transition={{
-                  delay: isInitiallyLoading ? pageLoadDelay : 0,
+                  staggerChildren: 0.3,
+                  delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
                 }}
-                ref={ref}
                 className={clsx(
                   'col-span-12 md:col-span-6 xl:col-span-5',
                   'flex justify-center flex-col'
                 )}
               >
-                <h2 className="text-pink-darker text-4xl md:text-5xl font-bold mb-8">
+                <motion.h2
+                  {...fadeUpDownProps}
+                  className="text-pink-darker text-4xl md:text-5xl font-bold mb-8"
+                >
                   {instagramSectionContents.mainHeading}
-                </h2>
+                </motion.h2>
 
-                <p className="text-gray-semi-dark text-lg mb-12">
+                <motion.p
+                  {...fadeUpDownProps}
+                  className="text-gray-semi-dark text-lg mb-12"
+                >
                   {instagramSectionContents.mainDescription}
-                </p>
+                </motion.p>
 
-                <a
+                <motion.a
+                  {...fadeUpDownProps}
                   href="https://www.instagram.com/kimifaery/"
                   target="_blank"
                   rel="noreferrer"
@@ -52,12 +59,12 @@ const InstagramSection: React.FC = () => {
                   <Button variant="secondary" className="w-72 max-w-full">
                     {instagramSectionContents.buttonText}
                   </Button>
-                </a>
+                </motion.a>
               </motion.div>
             )}
           </InView>
 
-          <InView>
+          <InView threshold={0.5}>
             {({ inView, ref }) => (
               <motion.div
                 {...fadeUpDownProps}
