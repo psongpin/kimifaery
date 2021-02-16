@@ -1,9 +1,8 @@
-import { useState } from 'react'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/client'
-import { useEffectOnce } from 'react-use'
+import { useEffectOnce, useTimeout } from 'react-use'
 import NProgress from 'nprogress'
 import { DefaultSeo } from 'next-seo'
 
@@ -23,7 +22,6 @@ import '../styles/globals.css'
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps)
   const router = useRouter()
-  const [isInitiallyLoading, setIsInitiallyLoading] = useState(true)
 
   useEffectOnce(() => {
     const nprogressStart = () => NProgress.start()
@@ -34,24 +32,14 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     router.events.on('routeChangeComplete', nprogressDone)
     router.events.on('routeChangeError', nprogressDone)
 
-    let timer: NodeJS.Timeout
-
-    const removeLoadScreen = () => {
-      timer = setTimeout(() => {
-        setIsInitiallyLoading(false)
-      }, pageLoadDelay * 1000)
-    }
-
-    window.addEventListener('load', removeLoadScreen)
-
     return () => {
       router.events.off('routeChangeStart', nprogressStart)
       router.events.off('routeChangeComplete', nprogressDone)
       router.events.off('routeChangeError', nprogressDone)
-      if (timer) clearTimeout(timer)
-      window.removeEventListener('load', removeLoadScreen)
     }
   })
+
+  const [isReady] = useTimeout(pageLoadDelay * 1000)
 
   return (
     <>
@@ -62,7 +50,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           <GlobalStyle />
 
           <PageLoadContext.Provider
-            value={{ isInitiallyLoading, pageLoadDelay }}
+            value={{ isInitiallyLoading: !isReady(), pageLoadDelay }}
           >
             <InitialPageLoader />
 
