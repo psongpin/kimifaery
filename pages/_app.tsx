@@ -36,17 +36,20 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
 
     let timer: NodeJS.Timeout
 
-    window.onload = () => {
+    const removeLoadScreen = () => {
       timer = setTimeout(() => {
         setIsInitiallyLoading(false)
       }, pageLoadDelay * 1000)
     }
+
+    window.addEventListener('load', removeLoadScreen)
 
     return () => {
       router.events.off('routeChangeStart', nprogressStart)
       router.events.off('routeChangeComplete', nprogressDone)
       router.events.off('routeChangeError', nprogressDone)
       if (timer) clearTimeout(timer)
+      window.removeEventListener('load', removeLoadScreen)
     }
   })
 
