@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/client'
 import { useEffectOnce, useTimeout } from 'react-use'
 import NProgress from 'nprogress'
 import { DefaultSeo } from 'next-seo'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import Footer from 'components/Footer'
 import Header from 'components/Header'
@@ -57,7 +58,16 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
             <div className="page-background bg-pink-pale">
               <div className="page-root flex flex-col min-h-screen relative">
                 <Header />
-                <Component {...pageProps} />
+                <AnimatePresence exitBeforeEnter initial={false}>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    key={router.pathname}
+                  >
+                    <Component {...pageProps} />
+                  </motion.div>
+                </AnimatePresence>
                 <Footer />
               </div>
             </div>
