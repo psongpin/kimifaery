@@ -18,7 +18,8 @@ export const introductionContents = {
     },
     {
       title: 'Branding',
-      description: 'Optimized digital products, help business grow more.',
+      description:
+        'Through strategic vision, I build solutions to help brands standout.',
       image: '/images/Branding.png',
       imgW: 459,
       imgH: 216,
