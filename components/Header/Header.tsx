@@ -72,13 +72,13 @@ const Header: React.FC = () => {
               <a
                 className={clsx(
                   getHeaderColor(router.pathname, isOnTop),
-                  'text-lg font-medium',
+                  'font-medium',
                   'flex items-center',
                   'transition-all ease-linear duration-300'
                 )}
               >
-                <span>❤️</span>
-                <span className="underline ml-2">{headerMainLink}</span>
+                <span className="text-lg">❤️</span>
+                <span className="text-sm underline ml-2">{headerMainLink}</span>
               </a>
             </Link>
 

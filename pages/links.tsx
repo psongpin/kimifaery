@@ -134,7 +134,9 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
         }}
       />
 
-      <div className={clsx('container', 'flex-1 flex flex-col', 'pt-40')}>
+      <div
+        className={clsx('container', 'flex-1 flex flex-col', 'pt-28 md:pt-40')}
+      >
         <InView threshold={0.2}>
           {({ inView, ref }) => (
             <motion.section
@@ -170,7 +172,15 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
         {data && (
           <>
             {data.linkPostsConnection.edges.length ? (
-              <Grid className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-16 mt-20 mx-auto max-w-full">
+              <Grid
+                className={clsx(
+                  'grid',
+                  'grid-cols-2 lg:grid-cols-3',
+                  'gap-x-2 gap-y-6 md:gap-10 xl:gap-16',
+                  'mt-12 md:mt-20 mx-auto',
+                  'max-w-full'
+                )}
+              >
                 {data.linkPostsConnection.edges.map(linkPostEdge => (
                   <LinkGridItem
                     key={`${linkPostEdge.node.id}${tag ? '-'.concat(tag) : ''}${

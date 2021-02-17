@@ -29,11 +29,18 @@ const OverlayLink = styled.a`
 `
 
 const Tag = styled.div<TagProps>`
+  font-size: 8px;
+  line-height: 0.8rem;
   background-color: ${props => {
     if (props.tagValue === 'Favorites') return '#34cacf'
     if (props.tagValue === 'Must Haves') return '#aa5ff5'
     return '#fc319b'
   }};
+
+  @media (min-width: 768px) {
+    font-size: 12px;
+    line-height: 1rem;
+  }
 `
 
 const tagMarks: Record<string, string> = {
@@ -65,26 +72,33 @@ const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl, tags }) => {
             width={448}
             height={448}
           />
-          <div className="px-8 py-10">
-            <h3 className="text-pink-darker text-lg md:text-xl font-bold">
+          <div className={clsx('px-3 md:px-8', 'py-4 md:py-10')}>
+            <h3 className="text-pink-darker text-sm md:text-xl font-bold">
               {title}
             </h3>
           </div>
 
-          <div className="absolute top-4 right-4 grid gap-y-2">
+          <div
+            className={clsx(
+              'absolute',
+              'top-1 md:top-4',
+              'right-1 md:right-4',
+              'grid gap-y-1 md:gap-y-2'
+            )}
+          >
             {tags.map(tag => (
               <Tag
                 key={tag}
                 className={clsx(
                   'flex',
-                  'text-white text-xs font-bold uppercase',
+                  'text-white font-bold uppercase',
                   'rounded-lg',
-                  'px-3 py-2',
-                  'w-44'
+                  'px-2 py-1 md:px-3 md:py-2',
+                  'w-28 md:w-44'
                 )}
                 tagValue={tag}
               >
-                <span>{tagMarks[tag]}</span>
+                <span className="mr-2">{tagMarks[tag]}</span>
                 <span className="flex-1 text-center">{tag}</span>
               </Tag>
             ))}
@@ -95,7 +109,7 @@ const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl, tags }) => {
             target="_blank"
             rel="noreferrer"
             className={clsx(
-              'absolute inset-0 z-10 bg-transparent hover:bg-gray-800 hover:bg-opacity-10',
+              'absolute inset-0 z-10 lg:bg-transparent lg:hover:bg-gray-800 lg:hover:bg-opacity-10',
               'w-full h-full',
               'flex items-center justify-center',
               'transition-all ease-linear duration-200'
@@ -103,7 +117,7 @@ const LinkGridItem: React.FC<Props> = ({ title, url, thumbnailUrl, tags }) => {
           >
             <span
               className={clsx(
-                'flex items-center',
+                'hidden lg:flex items-center',
                 'text-white text-lg',
                 'bg-pink-orange',
                 'rounded-full',

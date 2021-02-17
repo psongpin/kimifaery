@@ -40,17 +40,23 @@ const SearchForm: React.FC<Props> = ({ searchString = '' }) => {
           required
           className={clsx(
             'w-full',
-            'text-lg text-pink-darker',
+            'md:text-lg text-pink-darker',
             'rounded-full border-transparent',
             'focus:outline-none',
-            'py-4 pl-8 pr-24 md:pr-40'
+            'py-3 md:py-4',
+            'pl-4 md:pl-8',
+            'pr-20 md:pr-40'
           )}
           value={search}
           onChange={onInputChange}
         />
 
         <div className="absolute right-0 inset-y-0">
-          <Button variant="primary" type="submit" padding="px-8 md:px-10 py-4">
+          <Button
+            variant="primary"
+            type="submit"
+            padding={clsx('px-6 md:px-10', 'py-2.5 md:py-4')}
+          >
             <span className="hidden md:inline">Search</span>
             <svg
               className="inline md:hidden w-6 h-6"

@@ -1,5 +1,5 @@
 const contents = {
-  mainHeading: `Ah, I see, you're a man of culture too.`,
+  mainHeading: `Get it while it’s hot`,
   mainDescription: `Discover the items I feature on my IG post (don't blame me for ripping your wallets pls)`,
 }
 
