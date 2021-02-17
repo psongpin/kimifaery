@@ -29,7 +29,9 @@ const getColorByTag = (tag: TagValues): string => {
 }
 
 const Frame = styled.div`
-  width: 440px;
+  @media (min-width: 768px) {
+    width: 75%;
+  }
 
   @media (min-width: 1024px) {
     width: initial;
@@ -38,11 +40,12 @@ const Frame = styled.div`
 
 const Tag = styled.button.attrs({
   className: clsx(
-    'py-3 px-8 mx-2.5 mb-5',
+    'py-2 px-4 md:py-3 md:px-8 m-0 md:mx-2.5 md:mb-5',
     'rounded-full border-2',
-    'md:text-lg lg:text-xl font-bold',
-    'w-full',
-    `focus:outline-none`
+    'text-xs md:text-lg lg:text-xl font-bold',
+    'w-full md:w-52 max-w-full',
+    `focus:outline-none`,
+    'transition-all ease-in-out duration-200'
   ),
   type: 'button',
 })<TagProps>`
@@ -51,9 +54,6 @@ const Tag = styled.button.attrs({
   background-color: ${props =>
     props.selected ? getColorByTag(props.tagValue) : 'transparent'};
   border-color: ${props => getColorByTag(props.tagValue)};
-  width: 200px;
-  max-width: 100%;
-  transition: all 0.2s ease-in-out;
 
   &:hover {
     background-color: ${props => getColorByTag(props.tagValue)};
@@ -71,7 +71,13 @@ const TagFilters: React.FC = () => {
   }
 
   return (
-    <Frame className="flex justify-center flex-wrap max-w-full mx-auto">
+    <Frame
+      className={clsx(
+        'grid grid-cols-2 gap-x-2 gap-y-2 md:gap-x-0 md:gap-y-0',
+        'md:flex md:justify-center md:flex-wrap',
+        'max-w-full mx-auto'
+      )}
+    >
       {TAGS.map(tag => {
         const condition =
           tag === 'All' ? _isEmpty(router.query) : router.query.tag === tag
