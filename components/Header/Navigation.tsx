@@ -51,7 +51,7 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ ease: 'easeInOut', duration: 0.2 }}
+        transition={{ ease: 'linear', duration: 0.2 }}
         className={clsx(
           'fixed inset-0 z-20',
           'w-screen h-screen bg-gray-900 bg-opacity-50',
@@ -63,7 +63,7 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
         initial={{ x: '100%', opacity: 0 }}
         animate={{ x: '0%', opacity: 1 }}
         exit={{ x: '100%' }}
-        transition={{ ease: 'easeInOut', duration: 0.2 }}
+        transition={{ ease: 'linear', duration: 0.2 }}
         className={clsx(
           'fixed top-0 right-0 z-20',
           'bg-pink-hot',

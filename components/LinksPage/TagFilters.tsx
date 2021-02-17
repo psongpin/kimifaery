@@ -48,7 +48,7 @@ const Tag = styled.button.attrs({
     'text-xs md:text-lg lg:text-xl font-bold',
     'w-full md:w-52 max-w-full',
     `focus:outline-none`,
-    'transition-all ease-in-out duration-200'
+    'transition-all ease-linear duration-200'
   ),
   type: 'button',
 })<TagProps>`

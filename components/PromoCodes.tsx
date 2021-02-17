@@ -68,7 +68,7 @@ const PromoCode: React.FC<Coupon> = ({
   }, [copied])
 
   return (
-    <InView threshold={0.2}>
+    <InView threshold={0.1}>
       {({ inView, ref }) => (
         <motion.div
           {...fadeUpDownProps}
@@ -126,7 +126,7 @@ const PromoCode: React.FC<Coupon> = ({
                 'text-white text-center text-sm uppercase',
                 'p-2 mt-4',
                 'hover:opacity-75 focus:outline-none',
-                'transition-all ease-in-out duration-200'
+                'transition-all ease-linear duration-200'
               )}
             >
               {copied ? 'copied' : 'copy'}
@@ -183,7 +183,7 @@ const PromoCodes: React.FC = () => {
                   'text-white text-center text-sm uppercase',
                   'p-2 mt-4',
                   'hover:opacity-75',
-                  'transition-all ease-in-out duration-200'
+                  'transition-all ease-linear duration-200'
                 )}
                 onClick={() => {
                   fetchMore({

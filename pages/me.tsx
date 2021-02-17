@@ -97,7 +97,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({
                 'py-4 px-6',
                 'rounded-full',
                 'hover:opacity-75',
-                'transition-all ease-in-out duration-200'
+                'transition-all ease-linear duration-200'
               )}
             >
               <IconFrame className="text-left mr-4">
@@ -117,7 +117,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({
               'py-4 px-6',
               'rounded-full',
               'hover:opacity-75',
-              'transition-all ease-in-out duration-200'
+              'transition-all ease-linear duration-200'
             )}
           >
             <IconFrame className="text-left mr-4">
@@ -156,7 +156,7 @@ const MePage: React.FC = () => {
                     opacity: 0,
                     transition: {
                       duration: 0.1,
-                      ease: 'easeInOut',
+                      ease: 'linear',
                     },
                   },
                   fadeDown: {
@@ -164,7 +164,7 @@ const MePage: React.FC = () => {
                     opacity: 1,
                     transition: {
                       duration: 0.6,
-                      ease: 'easeInOut',
+                      ease: 'linear',
                     },
                   },
                 }}
@@ -187,7 +187,7 @@ const MePage: React.FC = () => {
             )}
           </InView>
 
-          <Content className="mx-auto mt-32">
+          <Content className="mx-auto mt-32 pb-10">
             <InView threshold={0.2}>
               {({ inView, ref }) => (
                 <motion.div
