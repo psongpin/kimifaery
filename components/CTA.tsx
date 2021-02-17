@@ -19,6 +19,7 @@ const Frame = styled(motion.div)`
 
 const CTA: React.FC<Props> = ({ heading, buttonText }) => {
   const { isInitiallyLoading, pageLoadDelay } = usePageLoad()
+
   return (
     <InView threshold={0.2}>
       {({ inView, ref }) => (
