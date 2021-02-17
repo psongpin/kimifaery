@@ -2,6 +2,9 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import _isEmpty from 'lodash/isEmpty'
+import { motion } from 'framer-motion'
+
+import { fadeUpDownProps } from 'constants/animation'
 
 type TagValues = 'All' | 'Favorites' | 'Must Haves' | 'Partnerships'
 
@@ -28,7 +31,7 @@ const getColorByTag = (tag: TagValues): string => {
   return '#f2827f'
 }
 
-const Frame = styled.div`
+const Frame = styled(motion.div)`
   @media (min-width: 768px) {
     width: 75%;
   }
@@ -72,6 +75,7 @@ const TagFilters: React.FC = () => {
 
   return (
     <Frame
+      {...fadeUpDownProps}
       className={clsx(
         'grid grid-cols-2 gap-x-2 gap-y-2 md:gap-x-0 md:gap-y-0',
         'md:flex md:justify-center md:flex-wrap',

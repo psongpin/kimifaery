@@ -5,7 +5,7 @@ export const fadeUpDownVariants: Variants = {
     y: -30,
     opacity: 0,
     transition: {
-      duration: 0.2,
+      duration: 0.1,
       ease: 'easeInOut',
     },
   },
@@ -13,7 +13,7 @@ export const fadeUpDownVariants: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.8,
+      duration: 0.6,
       ease: 'easeInOut',
     },
   },

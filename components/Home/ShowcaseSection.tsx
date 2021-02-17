@@ -114,7 +114,7 @@ const ShowcaseSection: React.FC = () => {
                     inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'
                   }
                   transition={{
-                    staggerChildren: 0.3,
+                    staggerChildren: 0.2,
                     delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
                     duration: 0.8,
                   }}
@@ -170,7 +170,7 @@ const ShowcaseSection: React.FC = () => {
               initial="fadeUp"
               animate={inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'}
               transition={{
-                staggerChildren: 0.3,
+                staggerChildren: 0.2,
                 delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
               }}
               className={clsx('py-32 mx-auto', 'flex flex-col items-center')}

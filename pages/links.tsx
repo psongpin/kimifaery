@@ -3,6 +3,8 @@ import clsx from 'clsx'
 import styled from 'styled-components'
 import { gql, useQuery } from '@apollo/client'
 import { NextSeo } from 'next-seo'
+import { InView } from 'react-intersection-observer'
+import { motion } from 'framer-motion'
 
 import CTA from 'components/CTA'
 import LinkGridItem from 'components/LinksPage/LinkGridItem'
@@ -10,9 +12,11 @@ import SearchForm from 'components/LinksPage/SearchForm'
 import TagFilters from 'components/LinksPage/TagFilters'
 import Button from 'components/Button'
 import Loader from 'components/Loader'
+import { usePageLoad } from 'contexts/initialPageLoad'
 import { showcaseContents } from 'constants/home'
 import contents from 'constants/links'
 import config from 'constants/seo'
+import { fadeUpDownProps } from 'constants/animation'
 import { addApolloState, initializeApollo } from 'lib/apolloClient'
 import { LinkPostWhereInput, Query } from 'types/graphcms'
 
@@ -107,6 +111,16 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
     }
   )
 
+  const { isInitiallyLoading, pageLoadDelay } = usePageLoad()
+
+  const fadeProps = {
+    ...fadeUpDownProps,
+    initial: 'fadeUp',
+    transition: {
+      delay: isInitiallyLoading ? pageLoadDelay : 0,
+    },
+  }
+
   return (
     <>
       <NextSeo
@@ -121,18 +135,37 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
       />
 
       <div className={clsx('container', 'flex-1 flex flex-col', 'pt-40')}>
-        <section className="text-center">
-          <h1 className="text-pink-darker text-4xl md:text-5xl font-bold mb-6">
-            {contents.mainHeading}
-          </h1>
+        <InView threshold={0.2}>
+          {({ inView, ref }) => (
+            <motion.section
+              ref={ref}
+              initial="fadeUp"
+              animate={inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'}
+              transition={{
+                staggerChildren: 0.2,
+                delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
+              }}
+              className="text-center"
+            >
+              <motion.h1
+                {...fadeProps}
+                className="text-pink-darker text-4xl md:text-5xl font-bold mb-6"
+              >
+                {contents.mainHeading}
+              </motion.h1>
 
-          <p className="text-pink-darker md:text-lg mb-10">
-            {contents.mainDescription}
-          </p>
+              <motion.p
+                {...fadeProps}
+                className="text-pink-darker md:text-lg mb-10"
+              >
+                {contents.mainDescription}
+              </motion.p>
 
-          <SearchForm searchString={searchString} />
-          <TagFilters />
-        </section>
+              <SearchForm searchString={searchString} />
+              <TagFilters />
+            </motion.section>
+          )}
+        </InView>
 
         {data && (
           <>
@@ -140,7 +173,9 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
               <Grid className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 xl:gap-16 mt-20 mx-auto max-w-full">
                 {data.linkPostsConnection.edges.map(linkPostEdge => (
                   <LinkGridItem
-                    key={linkPostEdge.node.id}
+                    key={`${linkPostEdge.node.id}${tag ? '-'.concat(tag) : ''}${
+                      searchString ? '-'.concat(searchString) : ''
+                    }`}
                     title={linkPostEdge.node.title}
                     url={linkPostEdge.node.redirectLink}
                     thumbnailUrl={linkPostEdge.node.thumbnail.url}
@@ -149,9 +184,20 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
                 ))}
               </Grid>
             ) : (
-              <h1 className="text-pink-darker text-3xl font-bold text-center mt-20">
-                No links found!
-              </h1>
+              <InView threshold={0.2}>
+                {({ inView, ref }) => (
+                  <motion.h1
+                    {...fadeProps}
+                    animate={
+                      inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'
+                    }
+                    ref={ref}
+                    className="text-pink-darker text-3xl font-bold text-center mt-20"
+                  >
+                    No links found!
+                  </motion.h1>
+                )}
+              </InView>
             )}
 
             {loading && (
@@ -161,21 +207,32 @@ const Links: React.FC<Props> = ({ searchString, tag }) => {
             )}
 
             {!loading && data.linkPostsConnection.pageInfo.hasNextPage && (
-              <div className="w-60 max-w-full mx-auto mt-10">
-                <Button
-                  variant="primary"
-                  className="w-full"
-                  onClick={() =>
-                    fetchMore({
-                      variables: {
-                        after: data.linkPostsConnection.pageInfo.endCursor,
-                      },
-                    })
-                  }
-                >
-                  Load More
-                </Button>
-              </div>
+              <InView threshold={0.2}>
+                {({ inView, ref }) => (
+                  <motion.div
+                    {...fadeProps}
+                    animate={
+                      inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'
+                    }
+                    ref={ref}
+                    className="w-60 max-w-full mx-auto mt-10"
+                  >
+                    <Button
+                      variant="primary"
+                      className="w-full"
+                      onClick={() =>
+                        fetchMore({
+                          variables: {
+                            after: data.linkPostsConnection.pageInfo.endCursor,
+                          },
+                        })
+                      }
+                    >
+                      Load More
+                    </Button>
+                  </motion.div>
+                )}
+              </InView>
             )}
           </>
         )}

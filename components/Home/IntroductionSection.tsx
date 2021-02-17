@@ -78,7 +78,7 @@ const IntroductionSection: React.FC = () => {
               initial="fadeUp"
               animate={inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'}
               transition={{
-                staggerChildren: 0.3,
+                staggerChildren: 0.2,
                 delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
               }}
               className="text-center md:text-left"
@@ -127,7 +127,7 @@ const IntroductionSection: React.FC = () => {
                     inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'
                   }
                   transition={{
-                    staggerChildren: 0.3,
+                    staggerChildren: 0.2,
                     delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
                     duration: 0.8,
                   }}

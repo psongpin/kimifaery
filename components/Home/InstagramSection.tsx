@@ -28,7 +28,7 @@ const InstagramSection: React.FC = () => {
                 initial="fadeUp"
                 animate={inView && !isInitiallyLoading ? 'fadeDown' : 'fadeUp'}
                 transition={{
-                  staggerChildren: 0.3,
+                  staggerChildren: 0.2,
                   delayChildren: isInitiallyLoading ? pageLoadDelay : 0,
                 }}
                 className={clsx(

@@ -2,14 +2,16 @@ import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
+import { motion } from 'framer-motion'
 
 import Button from 'components/Button'
+import { fadeUpDownProps } from 'constants/animation'
 
 interface Props {
   searchString?: string
 }
 
-const Frame = styled.div`
+const Frame = styled(motion.div)`
   width: 800px;
 `
 
@@ -29,7 +31,7 @@ const SearchForm: React.FC<Props> = ({ searchString = '' }) => {
   }
 
   return (
-    <Frame className="max-w-full mx-auto mb-10">
+    <Frame {...fadeUpDownProps} className="max-w-full mx-auto mb-10">
       <form onSubmit={onSubmit} className="block w-full relative">
         <input
           type="text"

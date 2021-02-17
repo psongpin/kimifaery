@@ -80,7 +80,7 @@ const Navigation: React.FC<Props> = ({ setMenuVisibility }) => {
             initial="fadeUp"
             animate="fadeDown"
             transition={{
-              staggerChildren: 0.3,
+              staggerChildren: 0.2,
             }}
           >
             {headerLinks.map(link => (
