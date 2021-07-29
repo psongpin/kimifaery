@@ -48,6 +48,14 @@ const LINKS = [
     bgColor: '#CBACEB',
     iconUrl: 'images/tiktok.svg',
   },
+  {
+    url:
+      'https://drive.google.com/drive/folders/1YOKLxakwvdzDBh0LNhqjmvYnllf9I8YL?usp=sharing',
+    label: 'Downloads',
+    isExternal: true,
+    bgColor: '#B5DDFF',
+    iconUrl: 'images/download.svg',
+  },
 ]
 
 const Frame = styled.div`
